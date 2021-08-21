@@ -1,18 +1,33 @@
 $(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/main/resources/features/Test.feature");
 formatter.feature({
-  "name": "Тестовый feature-файл",
+  "name": "Check Subscription of ETP Markets",
   "description": "",
-  "keyword": "Функционал",
+  "keyword": "Feature",
   "tags": [
     {
       "name": "@Test"
     }
   ]
 });
-formatter.scenario({
-  "name": "@Step1 Открыть браузер",
+formatter.background({
+  "name": "",
   "description": "",
-  "keyword": "Сценарий",
+  "keyword": "Background"
+});
+formatter.step({
+  "name": "open page",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "steps.CustomSteps.getPage()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Open Browser",
+  "description": "",
+  "keyword": "Scenario",
   "tags": [
     {
       "name": "@Test"
@@ -20,8 +35,8 @@ formatter.scenario({
   ]
 });
 formatter.step({
-  "name": "открыть страницу",
-  "keyword": "Дано "
+  "name": "open page",
+  "keyword": "When "
 });
 formatter.match({
   "location": "steps.CustomSteps.getPage()"
@@ -31,19 +46,34 @@ formatter.result({
 });
 formatter.uri("file:src/main/resources/features/Test2.feature");
 formatter.feature({
-  "name": "Тестовый feature-файл",
+  "name": "Check Subscription of ETP Markets",
   "description": "",
-  "keyword": "Функционал",
+  "keyword": "Feature",
   "tags": [
     {
       "name": "@Test"
     }
   ]
 });
-formatter.scenario({
-  "name": "@Step1 Открыть браузер",
+formatter.background({
+  "name": "",
   "description": "",
-  "keyword": "Сценарий",
+  "keyword": "Background"
+});
+formatter.step({
+  "name": "open page",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "steps.CustomSteps.getPage()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Open Browser",
+  "description": "",
+  "keyword": "Scenario",
   "tags": [
     {
       "name": "@Test"
@@ -51,8 +81,8 @@ formatter.scenario({
   ]
 });
 formatter.step({
-  "name": "открыть страницу",
-  "keyword": "Дано "
+  "name": "open page",
+  "keyword": "When "
 });
 formatter.match({
   "location": "steps.CustomSteps.getPage()"

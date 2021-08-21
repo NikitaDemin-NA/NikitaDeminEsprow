@@ -1,10 +1,16 @@
-#language: ru
+#language: en
 #encoding: utf-8
 
 @Test
-Функционал: Тестовый feature-файл
+  Feature: Check Subscription of ETP Markets
 
-  Сценарий: @Step1 Открыть браузер
+    Background:
+      When open page
 
-      #шаг1
-    Дано открыть страницу
+    Scenario: Open Browser
+
+    #step1
+    When open page
+
+
+

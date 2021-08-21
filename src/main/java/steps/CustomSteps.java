@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CustomSteps {
 
-    @Если("открыть страницу")
+    @Если("open page")
     public void getPage() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver91");
         ChromeOptions options = new ChromeOptions();
