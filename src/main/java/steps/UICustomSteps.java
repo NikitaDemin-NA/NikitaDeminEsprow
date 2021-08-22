@@ -16,6 +16,7 @@ public class UICustomSteps {
     String emailField;
     int numAddNewExchange;
 
+
     public void getPageInWindows() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver92_Windows.exe");
         ChromeOptions options = new ChromeOptions();
@@ -59,7 +60,7 @@ public class UICustomSteps {
 
 
     public WebElement getElementByXpath(WebDriver driver, String xpath) throws InterruptedException {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             try {
                 return driver.findElement(By.xpath(xpath));
             } catch (Exception e) {
@@ -70,7 +71,7 @@ public class UICustomSteps {
     }
 
     public List<WebElement> getElementsByXpath(WebDriver driver, String xpath) throws InterruptedException {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             try {
                 return driver.findElements(By.xpath(xpath));
             } catch (Exception e) {
@@ -119,14 +120,14 @@ public class UICustomSteps {
         WebElement signin = driver.findElement(By.xpath("//button[text()='Sign In']"));
         signin.click();
 
-        for (int i = 0; i <10 ; i++) {
+        for (int i = 0; i <1 ; i++) {
             try {
                 String url = driver.getCurrentUrl();
                 if(url.equals("https://spa-dev.etpmarkets.com:3000/app/subscription")){
                 } else if(url.equals("https://spa-dev.etpmarkets.com:3000/app/exchange")){
                 }
             } catch (Exception e) {
-                Thread.sleep(2000);
+                Thread.sleep(3000);
             }
         }
 
