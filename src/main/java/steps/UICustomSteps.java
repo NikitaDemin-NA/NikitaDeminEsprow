@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class UICustomSteps {
     WebDriver driver;
     String emailField;
+    int numAddNewExchange;
 
     public void getPageInWindows() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver92_Windows.exe");
@@ -166,9 +167,11 @@ public class UICustomSteps {
 
 
     //click on "+" button
-    public void clickOnPlusButton() {
-        WebElement clickPlusButton = driver.findElement(By.xpath("//div/*[name()='svg']/*[name()='line']/parent::*[name()='svg']/parent::div"));
-        clickPlusButton.click();
+    public void clickOnPlusButton(int numAddNewExchange) {
+        for (int i = 0; i < numAddNewExchange; i++) {
+            WebElement clickPlusButton = driver.findElement(By.xpath("//div/*[name()='svg']/*[name()='line']/parent::*[name()='svg']/parent::div"));
+            clickPlusButton.click();
+        }
     }
 
 
@@ -191,6 +194,17 @@ public class UICustomSteps {
         }
     }
 
+    //check new value of sessions
+    public void checkNewNumberOfSessions(int numAddNewExchange) throws Exception {
+        this.numAddNewExchange = numAddNewExchange;
+        String numberOfSessions = getElementByXpath(driver, "//div/span[text()='Sessions:']/following-sibling::span").getText();
+        String parseNumberOfSessions = numberOfSessions.replaceAll("[^0-9]", "");
+
+        if (Integer.parseInt(parseNumberOfSessions) != numAddNewExchange*100) {
+            throw new Exception("value of Sessions is not $"+numAddNewExchange*10+".0");
+        }
+    }
+
 
     //check value of total
     public void checkNumberOfTotal(String numberOfTot) throws Exception {
@@ -198,6 +212,18 @@ public class UICustomSteps {
 
         if (!numberOfTotal.equals(numberOfTot)) {
             throw new Exception("value of Sessions is not "+numberOfTot);
+        }
+    }
+
+    //check new value of total
+    public void checkNewNumberOfTotal(int numAddNewExchange) throws Exception {
+        this.numAddNewExchange = numAddNewExchange;
+        String numberOfTotal = getElementByXpath(driver, "//div/span[text()='Total cost:']/following-sibling::span").getText();
+        String parseNumberOfTotal = numberOfTotal.replaceAll("[^0-9]", "");
+
+
+        if (Integer.parseInt(parseNumberOfTotal)!= 500+(numAddNewExchange*100)) {
+            throw new Exception("value of Total is not $"+(500+(numAddNewExchange*100))+".0");
         }
     }
 

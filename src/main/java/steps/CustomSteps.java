@@ -67,7 +67,6 @@ public class CustomSteps extends UICustomSteps {
                 throw new Exception("Subscription doesn't open");
             }
         }
-
     }
 
 
@@ -82,8 +81,9 @@ public class CustomSteps extends UICustomSteps {
         }
     }
 
-    @Given("add new Exchange")
-    public void AddNewExchange() throws Exception {
+    @Given("add new Exchange with {int} Number of Sessions")
+    public void AddNewExchange(int numAddNewExchange) throws Exception {
+        this.numAddNewExchange = numAddNewExchange;
         WebElement chooseProtocolType = driver.findElement(By.xpath("//div/div[text()='Protocol type']/parent::div/input"));
         chooseProtocolType.click();
 
@@ -94,14 +94,25 @@ public class CustomSteps extends UICustomSteps {
         checkNumberOfSessions("$0.0");
         checkNumberOfTotal("$50.0");
         //click on "+" button
-        clickOnPlusButton();
+        clickOnPlusButton(numAddNewExchange);
 
         //steps after adding Number of Sessions
-        checkNumberOfSessions("$10.0");
-        checkNumberOfTotal("$60.0");
+        checkNewNumberOfSessions(numAddNewExchange);
+        checkNewNumberOfTotal(numAddNewExchange);
 
         //click on "Add" button
         clickOnAddButton();
+
+        //check new Exchange
+        String url = driver.getCurrentUrl();
+        if(url.equals("https://spa-dev.etpmarkets.com:3000/app/subscription")) {
+            List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//span[text()='[Exchange not created yet]']"));
+            int quantityOfNewExchanges = checkNewExchanges.size();
+
+            if (quantityOfNewExchanges != 1) {
+                throw new Exception("New Exchange didn't create");
+            }
+        }
     }
 
 

@@ -75,11 +75,11 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "add new Exchange",
+  "name": "add new Exchange with 170 Number of Sessions",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "steps.CustomSteps.AddNewExchange()"
+  "location": "steps.CustomSteps.AddNewExchange(int)"
 });
 formatter.result({
   "status": "passed"

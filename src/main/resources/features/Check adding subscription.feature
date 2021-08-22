@@ -14,7 +14,7 @@
 
       #step1
       When click on "Add Exchange" button
-      Then add new Exchange
+      Then add new Exchange with 1 Number of Sessions
 
 
       When wait 4 seconds
