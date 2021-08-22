@@ -1,7 +1,5 @@
 package steps;
 
-import org.junit.After;
-import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class UICustomSteps {
     WebDriver driver;
+    String emailField;
 
     public void getPageInWindows() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver92_Windows.exe");
@@ -86,6 +85,7 @@ public class UICustomSteps {
     public void setEmail(String emailField) {
         WebElement email = driver.findElement(By.xpath("//input[@name='email']"));
         email.clear();
+        this.emailField = emailField;
         email.sendKeys(emailField);
     }
 
@@ -97,9 +97,24 @@ public class UICustomSteps {
     }
 
 
-    public void authorizationButton() {
+    public void authorizationButton() throws Exception {
         WebElement signin = driver.findElement(By.xpath("//button[text()='Sign In']"));
         signin.click();
+
+        waitforPageLoad(driver);
+        if (getElementByXpath(driver, "//h1[text()='Exchange Instances']") == null) {
+            throw new Exception("Exchange Instances doesn't open");
+        }
+
+        try {
+            String login = getElementByXpath(driver,"//span/img[@alt='user image']//following-sibling::div").getText();
+            String loginName = getElementByXpath(driver,"//p[text()='"+this.emailField+"']/parent::div/p[1]").getText();
+            if (login.equals(loginName)){
+            }
+        } catch (Exception e){
+            throw new Exception("Log In is not correct");
+        }
+
     }
 
 
