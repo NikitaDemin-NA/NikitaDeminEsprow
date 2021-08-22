@@ -1,7 +1,7 @@
 #language: en
 #encoding: utf-8
 
-@Test
+@Test2
   Feature: Check Subscription of ETP Markets
 
     Background:
