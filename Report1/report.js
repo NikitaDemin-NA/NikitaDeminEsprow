@@ -34,6 +34,16 @@ formatter.match({
 formatter.result({
   "status": "passed"
 });
+formatter.step({
+  "name": "sign in with login \u003d \"test.qa.3@esprow.com\" and password \u003d \"temporaryAccount\"",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "steps.CustomSteps.logIn(java.lang.String,java.lang.String)"
+});
+formatter.result({
+  "status": "passed"
+});
 formatter.scenario({
   "name": "Open Browser",
   "description": "",

@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class CustomSteps extends UICustomSteps {
-    WebDriver driver;
+
 
     @Given("open page")
     public void getPage() {
@@ -45,6 +45,48 @@ public class CustomSteps extends UICustomSteps {
         new WebDriverWait(driver,30).until(wd ->
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
+
+    @Given("sign in with login = {string} and password = {string}")
+    public void logIn(String emailField, String passwordField) throws Exception {
+        clickSignIn();
+        checkAuthorizationPage();
+        setEmail(emailField);
+        setPassword(passwordField);
+        authorizationButton();
+    }
+
+
+    public void checkAuthorizationPage() throws Exception {
+        waitforPageLoad(driver);
+        if(getElementByXpath(driver, "//h2[text()='Log in to ETP Markets']")== null){
+        throw new Exception("Log In page doesn't open");
+        }
+    }
+
+    public void clickSignIn(){
+        WebElement SignIn = driver.findElement(By.xpath("//a[@href='/auth/sign-in']"));
+        SignIn.click();
+    }
+
+    public void setEmail(String emailField){
+        WebElement email = driver.findElement(By.xpath("//input[@name='email']"));
+        email.clear();
+        email.sendKeys(emailField);
+    }
+
+    public void setPassword(String passwordField){
+        WebElement password = driver.findElement(By.xpath("//input[@name='password']"));
+        password.clear();
+        password.sendKeys(passwordField);
+    }
+
+    public void authorizationButton(){
+        WebElement signin = driver.findElement(By.xpath("//button[text()='Sign In']"));
+        signin.click();
+    }
+
+
+
 
     @Given("close browser")
     public void tearDown() {
