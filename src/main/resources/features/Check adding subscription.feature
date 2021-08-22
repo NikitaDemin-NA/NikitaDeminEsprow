@@ -9,9 +9,12 @@
       Then check page title
       Given sign in with login = "test.qa.3@esprow.com" and password = "temporaryAccount"
       And open Subscription page
-    Scenario: Open Browser
+
+    Scenario: add Exchange subscription
 
     #step1
+    When click on "Add Exchange" button
+
     When close browser
 
 

@@ -57,7 +57,7 @@ public class UICustomSteps {
 
 
     public WebElement getElementByXpath(WebDriver driver, String xpath) throws InterruptedException {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             try {
                 return driver.findElement(By.xpath(xpath));
             } catch (Exception e) {
@@ -96,26 +96,42 @@ public class UICustomSteps {
         password.sendKeys(passwordField);
     }
 
+    public void clickLoginButton() {
+        WebElement login = driver.findElement(By.xpath("//span/img[@alt='user image']//following-sibling::div"));
+        login.click();
+    }
+
 
     public void authorizationButton() throws Exception {
         WebElement signin = driver.findElement(By.xpath("//button[text()='Sign In']"));
         signin.click();
 
-        waitforPageLoad(driver);
-        if (getElementByXpath(driver, "//h1[text()='Exchange Instances']") == null) {
-            throw new Exception("Exchange Instances doesn't open");
+        for (int i = 0; i <10 ; i++) {
+            try {
+                String url = driver.getCurrentUrl();
+                if(url.equals("https://spa-dev.etpmarkets.com:3000/app/subscription")){
+                } else if(url.equals("https://spa-dev.etpmarkets.com:3000/app/exchange")){
+                }
+            } catch (Exception e) {
+                Thread.sleep(2000);
+            }
         }
 
+
         try {
+            //login on top of the right corner
+            clickLoginButton();
             String login = getElementByXpath(driver,"//span/img[@alt='user image']//following-sibling::div").getText();
-            String loginName = getElementByXpath(driver,"//p[text()='"+this.emailField+"']/parent::div/p[1]").getText();
+            //login on left side of site
+            String  loginName = getElementByXpath(driver,"//p[text()='"+this.emailField+"']/parent::div/p[1]").getText();
             if (login.equals(loginName)){
             }
         } catch (Exception e){
             throw new Exception("Log In is not correct");
         }
-
     }
+
+
 
 
 }

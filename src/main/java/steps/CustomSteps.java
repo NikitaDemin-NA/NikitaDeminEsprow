@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.security.PublicKey;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -52,18 +53,35 @@ public class CustomSteps extends UICustomSteps {
         authorizationButton();
     }
 
+
     @Given("open Subscription page")
     public void openSubcirption() throws Exception {
-        WebElement login = driver.findElement(By.xpath("//span/img[@alt='user image']//following-sibling::div"));
-        login.click();
-        WebElement subscriptionButton = driver.findElement(By.xpath("//a[text()='Subscription']"));
-        subscriptionButton.click();
+        String url = driver.getCurrentUrl();
+        if(!url.equals("https://spa-dev.etpmarkets.com:3000/app/subscription")) {
+            WebElement subscriptionButton = driver.findElement(By.xpath("//a[text()='Subscription']"));
+            subscriptionButton.click();
+            waitforPageLoad(driver);
+            Thread.sleep(2000);
+            if (getElementByXpath(driver, "//h1[text()='Subscription']") == null) {
+                throw new Exception("Subscription doesn't open");
+            }
+        }
 
-        waitforPageLoad(driver);
-        if (getElementByXpath(driver, "//h1[text()='Subscription']") == null) {
-            throw new Exception("Subscription doesn't open");
+    }
+
+
+    @Given("click on \"Add Exchange\" button")
+    public void clickAddExchange() throws Exception {
+        WebElement test = driver.findElement(By.xpath("//div[text()='TRIAL']"));
+        test.click();
+        WebElement clickAddExchangeButton = driver.findElement(By.xpath("//button[text()='Add Exchange']"));
+        clickAddExchangeButton.click();
+        if(getElementByXpath(driver,"//h2[text()='Add New Exchange']") == null){
+            throw new Exception("pop-up window \"Add New Exchange\" doesn't open");
         }
     }
+
+
 
 
     @Given("close browser")
