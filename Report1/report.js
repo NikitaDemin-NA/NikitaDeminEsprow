@@ -19,7 +19,7 @@ formatter.step({
   "keyword": "When "
 });
 formatter.match({
-  "location": "steps.CustomSteps.getPage()"
+  "location": "steps.CustomSteps.startBrowserInMacOrWindows()"
 });
 formatter.result({
   "status": "passed"
