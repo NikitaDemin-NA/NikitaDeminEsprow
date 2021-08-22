@@ -52,6 +52,19 @@ public class CustomSteps extends UICustomSteps {
         authorizationButton();
     }
 
+    @Given("open Subscription page")
+    public void openSubcirption() throws Exception {
+        WebElement login = driver.findElement(By.xpath("//span/img[@alt='user image']//following-sibling::div"));
+        login.click();
+        WebElement subscriptionButton = driver.findElement(By.xpath("//a[text()='Subscription']"));
+        subscriptionButton.click();
+
+        waitforPageLoad(driver);
+        if (getElementByXpath(driver, "//h1[text()='Subscription']") == null) {
+            throw new Exception("Subscription doesn't open");
+        }
+    }
+
 
     @Given("close browser")
     public void tearDown() {
