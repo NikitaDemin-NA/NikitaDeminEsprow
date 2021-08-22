@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class UICustomSteps {
@@ -67,6 +68,17 @@ public class UICustomSteps {
         return null;
     }
 
+    public List<WebElement> getElementsByXpath(WebDriver driver, String xpath) throws InterruptedException {
+        for (int i = 0; i < 10; i++) {
+            try {
+                return driver.findElements(By.xpath(xpath));
+            } catch (Exception e) {
+                Thread.sleep(3000);
+            }
+        }
+        return null;
+    }
+
 
     public void checkAuthorizationPage() throws Exception {
         waitforPageLoad(driver);
@@ -117,7 +129,6 @@ public class UICustomSteps {
             }
         }
 
-
         try {
             //login on top of the right corner
             clickLoginButton();
@@ -132,6 +143,75 @@ public class UICustomSteps {
     }
 
 
+    //check a quantity of Protocol Type
+    public void checkQuantityProtocolType() throws Exception {
+        List<WebElement> findquantityProtocolType = getElementsByXpath(driver, "//div/div[contains(text(),'FIX')]");
+        int quantityProtocolType = findquantityProtocolType.size();
+        if (quantityProtocolType != 6) {
+            throw new Exception("A quantity of Protocol Type is not correct");
+        }
+    }
+
+
+    //check number of sessions
+    public void checkNumberOfSessions() throws Exception {
+        String numberOfSessions = getElementByXpath(driver, "//div/span[text()='Number of Sessions']/following-sibling::div/div[2]").getText();
+        WebElement clickProtocolType = driver.findElement(By.xpath("//div/div[contains(text(),'FIX')][1]"));
+        clickProtocolType.click();
+
+        if (!numberOfSessions.equals("0")) {
+            throw new Exception("number of Sessions is not \"0\"");
+        }
+    }
+
+
+    //click on "+" button
+    public void clickOnPlusButton() {
+        WebElement clickPlusButton = driver.findElement(By.xpath("//div/*[name()='svg']/*[name()='line']/parent::*[name()='svg']/parent::div"));
+        clickPlusButton.click();
+    }
+
+
+    //check value of protocol
+    public void checkNumberOfProtocol(String numberOfProt) throws Exception {
+        String numberOfProtocol = getElementByXpath(driver, "//div/span[text()='Protocol:']/following-sibling::span").getText();
+
+        if (!numberOfProtocol.equals(numberOfProt)) {
+            throw new Exception("value of Protocol is not "+numberOfProt);
+        }
+    }
+
+
+    //check value of sessions
+    public void checkNumberOfSessions(String numberOfSess) throws Exception {
+        String numberOfSessions = getElementByXpath(driver, "//div/span[text()='Sessions:']/following-sibling::span").getText();
+
+        if (!numberOfSessions.equals(numberOfSess)) {
+            throw new Exception("value of Sessions is not "+numberOfSess);
+        }
+    }
+
+
+    //check value of total
+    public void checkNumberOfTotal(String numberOfTot) throws Exception {
+        String numberOfTotal = getElementByXpath(driver, "//div/span[text()='Total cost:']/following-sibling::span").getText();
+
+        if (!numberOfTotal.equals(numberOfTot)) {
+            throw new Exception("value of Sessions is not "+numberOfTot);
+        }
+    }
+
+
+    //click on "Add" button
+    public void clickOnAddButton() {
+        WebElement clickAddButton = driver.findElement(By.xpath("//div/button[text()='Add']"));
+        clickAddButton.click();
+    }
 
 
 }
+
+
+
+
+

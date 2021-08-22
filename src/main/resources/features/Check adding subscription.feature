@@ -12,10 +12,12 @@
 
     Scenario: add Exchange subscription
 
-    #step1
-    When click on "Add Exchange" button
+      #step1
+      When click on "Add Exchange" button
+      Then add new Exchange
 
-    When close browser
 
+      When wait 4 seconds
+      When close browser
 
 

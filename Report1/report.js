@@ -75,6 +75,26 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
+  "name": "add new Exchange",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.AddNewExchange()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "wait 4 seconds",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "steps.CustomSteps.waitSecond(long)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
   "name": "close browser",
   "keyword": "When "
 });

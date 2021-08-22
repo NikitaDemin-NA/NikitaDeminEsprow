@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.security.PublicKey;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -61,7 +62,7 @@ public class CustomSteps extends UICustomSteps {
             WebElement subscriptionButton = driver.findElement(By.xpath("//a[text()='Subscription']"));
             subscriptionButton.click();
             waitforPageLoad(driver);
-            Thread.sleep(2000);
+            //Thread.sleep(2000);
             if (getElementByXpath(driver, "//h1[text()='Subscription']") == null) {
                 throw new Exception("Subscription doesn't open");
             }
@@ -81,7 +82,33 @@ public class CustomSteps extends UICustomSteps {
         }
     }
 
+    @Given("add new Exchange")
+    public void AddNewExchange() throws Exception {
+        WebElement chooseProtocolType = driver.findElement(By.xpath("//div/div[text()='Protocol type']/parent::div/input"));
+        chooseProtocolType.click();
 
+        //steps before adding Number of Sessions
+        checkQuantityProtocolType();
+        checkNumberOfSessions();
+        checkNumberOfProtocol("$50.0");
+        checkNumberOfSessions("$0.0");
+        checkNumberOfTotal("$50.0");
+        //click on "+" button
+        clickOnPlusButton();
+
+        //steps after adding Number of Sessions
+        checkNumberOfSessions("$10.0");
+        checkNumberOfTotal("$60.0");
+
+        //click on "Add" button
+        clickOnAddButton();
+    }
+
+
+    @Given("wait {long} seconds")
+    public void waitSecond(long seconds) throws InterruptedException {
+        Thread.sleep(seconds * 1000);
+    }
 
 
     @Given("close browser")
