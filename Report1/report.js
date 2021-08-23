@@ -52,8 +52,7 @@ formatter.match({
   "location": "steps.CustomSteps.openSubcirption()"
 });
 formatter.result({
-  "error_message": "java.lang.Exception: Subscription doesn\u0027t open\n\tat steps.CustomSteps.openSubcirption(CustomSteps.java:67)\n\tat ✽.open Subscription page(file:///Users/andrei/IdeaProjects/NikitaDeminEsprow/src/main/resources/features/Check%20adding%20subscription.feature:11)\n",
-  "status": "failed"
+  "status": "passed"
 });
 formatter.scenario({
   "name": "add Exchange subscription",
@@ -73,7 +72,7 @@ formatter.match({
   "location": "steps.CustomSteps.clickAddExchange()"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.step({
   "name": "add new Exchange with 1 Number of Sessions",
@@ -83,7 +82,17 @@ formatter.match({
   "location": "steps.CustomSteps.AddNewExchange(int)"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
+});
+formatter.step({
+  "name": "check Final Account",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.checkFinalAccount()"
+});
+formatter.result({
+  "status": "passed"
 });
 formatter.step({
   "name": "wait 4 seconds",
@@ -93,7 +102,7 @@ formatter.match({
   "location": "steps.CustomSteps.waitSecond(long)"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.step({
   "name": "close browser",
@@ -103,6 +112,6 @@ formatter.match({
   "location": "steps.CustomSteps.tearDown()"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 });

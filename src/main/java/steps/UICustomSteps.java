@@ -15,6 +15,7 @@ public class UICustomSteps {
     WebDriver driver;
     String emailField;
     int numAddNewExchange;
+    int quantityOfNewExchanges;
 
 
     public void getPageInWindows() {
@@ -22,9 +23,9 @@ public class UICustomSteps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors", "--disable-extensions", "--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
         driver.get("https://spa-dev.etpmarkets.com:3000/");
     }
 
@@ -34,9 +35,9 @@ public class UICustomSteps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors", "--disable-extensions", "--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
         driver.get("https://spa-dev.etpmarkets.com:3000/");
     }
 
@@ -46,9 +47,9 @@ public class UICustomSteps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors", "--disable-extensions", "--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
         driver.get("https://spa-dev.etpmarkets.com:3000/");
     }
 
@@ -170,7 +171,7 @@ public class UICustomSteps {
     //click on "+" button
     public void clickOnPlusButton(int numAddNewExchange) {
         for (int i = 0; i < numAddNewExchange; i++) {
-            WebElement clickPlusButton = driver.findElement(By.xpath("//div/*[name()='svg']/*[name()='line']/parent::*[name()='svg']/parent::div"));
+            WebElement clickPlusButton = driver.findElement(By.xpath("(//*[text()='Add New Exchange']/parent::div/div/div/div)[last()]/*[name()='svg']/*[name()='line']/parent::*[name()='svg']/parent::div"));
             clickPlusButton.click();
         }
     }
@@ -233,6 +234,28 @@ public class UICustomSteps {
     public void clickOnAddButton() {
         WebElement clickAddButton = driver.findElement(By.xpath("//div/button[text()='Add']"));
         clickAddButton.click();
+    }
+
+
+    //check a quantity of values Protocol Type
+    public void checkQuantityProtocolTypeFinalAccount() throws Exception {
+        //take a quantity of values Protocol Type in list of Subscription
+        List<WebElement> quantityOfTypeSubscription = getElementsByXpath(driver, "//input [@type='checkbox']");
+        int quantityOfTypeSubscriptionInt = quantityOfTypeSubscription.size();
+        quantityOfTypeSubscriptionInt--;
+
+        //take a quantity of values Protocol Type in list of Final Account Mounthly Subscription
+        List<WebElement> quantityOfTypeFinalAccountMS = getElementsByXpath(driver, "(//div/span[text()='Monthly Subscription']/parent::div)[1]/following-sibling::div[3]//p[contains(text(),'FIX')]");
+        int quantityOfTypeFinalAccountMSInt = quantityOfTypeFinalAccountMS.size();
+
+        //take a quantity of values Protocol Type in list of Final Account Current Payment
+        List<WebElement> quantityOfTypeFinalAccountCP = getElementsByXpath(driver, "(//div/span[text()='Current Payment']/parent::div)[1]/following-sibling::div[3]//span[contains(text(),'FIX')]");
+        int quantityOfTypeFinalAccountCPInt = quantityOfTypeFinalAccountCP.size();
+
+        if ((quantityOfTypeSubscriptionInt != quantityOfTypeFinalAccountMSInt)
+                && (quantityOfTypeFinalAccountMSInt != quantityOfTypeFinalAccountCPInt)) {
+            throw new Exception("a quantity of values Protocol Type is not correct");
+        }
     }
 
 

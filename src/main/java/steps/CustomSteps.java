@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.security.PublicKey;
@@ -66,6 +67,15 @@ public class CustomSteps extends UICustomSteps {
             if (getElementByXpath(driver, "//h1[text()='Subscription']") == null) {
                 throw new Exception("Subscription doesn't open");
             }
+
+            try{
+                WebDriverWait wait = new WebDriverWait(driver,3);
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'You don')]")));
+            } catch (Exception e){
+                List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//span[text()='[Exchange not created yet]']"));
+                quantityOfNewExchanges = checkNewExchanges.size();
+            }
+
         }
     }
 
@@ -107,12 +117,18 @@ public class CustomSteps extends UICustomSteps {
         String url = driver.getCurrentUrl();
         if(url.equals("https://spa-dev.etpmarkets.com:3000/app/subscription")) {
             List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//span[text()='[Exchange not created yet]']"));
-            int quantityOfNewExchanges = checkNewExchanges.size();
+            int quantityOfNewExchangesNew = checkNewExchanges.size();
 
-            if (quantityOfNewExchanges != 1) {
+            if (quantityOfNewExchangesNew != quantityOfNewExchanges+numAddNewExchange) {
                 throw new Exception("New Exchange didn't create");
             }
         }
+    }
+
+
+    @Given("check Final Account")
+    public void checkFinalAccount() throws Exception {
+        checkQuantityProtocolTypeFinalAccount();
     }
 
 

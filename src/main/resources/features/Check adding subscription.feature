@@ -15,6 +15,7 @@
       #step1
       When click on "Add Exchange" button
       Then add new Exchange with 1 Number of Sessions
+      Then check Final Account
 
 
       When wait 4 seconds
