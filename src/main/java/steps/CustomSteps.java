@@ -69,9 +69,11 @@ public class CustomSteps extends FinalAccount {
             }
 
             try{
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
                 waitForElementToAppear(driver, "//div[contains(text(),'You don')]", 3);
                 quantityOfNewExchanges=0;
             } catch (Exception e){
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                 List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//input[@type='checkbox']"));
                 quantityOfNewExchanges = checkNewExchanges.size();
                 quantityOfNewExchanges--;

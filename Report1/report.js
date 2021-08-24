@@ -65,7 +65,7 @@ formatter.scenario({
   ]
 });
 formatter.step({
-  "name": "add 8 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
+  "name": "add 2 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
   "keyword": "Then "
 });
 formatter.match({

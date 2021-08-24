@@ -51,9 +51,9 @@ public class UICustomSteps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors", "--disable-extensions", "--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
         driver.get("https://spa-dev.etpmarkets.com:3000/");
     }
 
@@ -257,7 +257,7 @@ public class UICustomSteps {
     //Explicit Wait
     public static void waitForElementToAppear(WebDriver driver, String selector, long timeOutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(selector)));
+        WebElement a = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(selector)));
     }
 
 

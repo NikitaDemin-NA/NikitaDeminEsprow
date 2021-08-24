@@ -3,6 +3,7 @@ package steps;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class FinalAccount extends UICustomSteps {
 
@@ -97,6 +98,7 @@ public class FinalAccount extends UICustomSteps {
     public void checkMounthlySubcriptionFinalAccount() throws Exception {
         int totalPriceMS = 0;
         int totalPriceSessionsMS = 0;
+        int totalAddPriceSessionsMS = 0;
         for (int i = 1; i <= quantityOfTypeSubscriptionInt; i++) {
             //get values Price in list of Subscription
             String priceListSubscription = getElementByXpath(driver, "(((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])/../following-sibling::div[2]/p[contains(text(),'$')])["+i+"]").getText();
@@ -109,10 +111,21 @@ public class FinalAccount extends UICustomSteps {
             String ePriceSessionsListSubscription = priceSessionsListSubscription.replaceAll("[^0-9]", "");
             int iPriceSessionsListSubscription = Integer.parseInt(ePriceSessionsListSubscription);
             totalPriceSessionsMS = iPriceSessionsListSubscription+totalPriceSessionsMS;
+
+            try{
+                //get values Additional Price Sessions in list of Subscription
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                waitForElementToAppear(driver, "((//div/p[text()='Price: $'])[1]/following-sibling::div[2]/div[2]/p[contains(text(),'+')])["+i+"]", 1);
+                String addPriceSessionsListSubscription = getElementByXpath(driver, "((//div/p[text()='Price: $'])[1]/following-sibling::div[2]/div[2]/p[contains(text(),'+')])["+i+"]").getText();
+                String eAddPriceSessionsListSubscription = addPriceSessionsListSubscription.replaceAll("[^0-9]", "");
+                int iAddPriceSessionsListSubscription = Integer.parseInt(eAddPriceSessionsListSubscription);
+                totalAddPriceSessionsMS = iAddPriceSessionsListSubscription+totalAddPriceSessionsMS;
+            } catch (Exception e){driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);}
         }
 
+
         try {
-            int totalMSFromList = totalPriceMS + totalPriceSessionsMS;
+            int totalMSFromList = totalPriceMS + totalPriceSessionsMS + totalAddPriceSessionsMS;
             String getMS = getElementByXpath(driver, "//div/span[text()='Monthly Subscription']/following-sibling::*").getText();
             String eGetMS = getMS.replaceAll("[^0-9]", "");
             int iGetMS = Integer.parseInt(eGetMS);
@@ -128,6 +141,7 @@ public class FinalAccount extends UICustomSteps {
 
     //check Current Payment
     public void checkCurrentPaymentFinalAccount() throws Exception {
+        Thread.sleep(2000);
         int totalPriceCP = 0;
         for (int i = 1; i <= quantityOfTypeSubscriptionInt; i++) {
             //get values Price in list of Subscription
