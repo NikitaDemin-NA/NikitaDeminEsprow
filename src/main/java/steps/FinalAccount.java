@@ -56,11 +56,9 @@ public class FinalAccount extends UICustomSteps {
             for (int p = 1; p <= quantityOfPaidTypeFinalAccountMSInt; p++) {
                 //get values Protocol Type in list of Subscription
                 String PTListSubscription = getElementByXpath(driver, "((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])[" + p + "]").getText();
-                System.out.println(PTListSubscription);
 
                 //get values Protocol Type in list of Final Account Mounthly Subscription
                 String PTMounthlySubscription = getElementByXpath(driver, "((//div/span[text()='Monthly Subscription']/parent::div)/following-sibling::div[3]//p[contains(text(),'FIX')])["+ p +"]").getText();
-                System.out.println(PTMounthlySubscription);
 
                 if(!PTListSubscription.equals(PTMounthlySubscription)){
                     throw new Exception("trouble with check of Paid Exchange");
@@ -74,11 +72,9 @@ public class FinalAccount extends UICustomSteps {
         for (int i = 1 + quantityOfPaidTypeFinalAccountMSInt; i <= quantityOfTypeSubscriptionInt; i++) {
             //get values Protocol Type in list of Subscription
             String PTListSubscription = getElementByXpath(driver, "((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])[" + i + "]").getText();
-            System.out.println(PTListSubscription);
 
             //get values Protocol Type in list of Final Account Mounthly Subscription
             String PTMounthlySubscription = getElementByXpath(driver, "((//div/span[text()='Monthly Subscription']/parent::div)/following-sibling::div[3]//p[contains(text(),'FIX')])[" + i + "]").getText();
-            System.out.println(PTMounthlySubscription);
 
             if ((!reversePTCurrentPayment().equals(PTMounthlySubscription))
                     && ((!PTListSubscription.equals(PTMounthlySubscription)))) {
@@ -91,9 +87,74 @@ public class FinalAccount extends UICustomSteps {
         for (int j = quantityOfTypeSubscriptionInt - quantityOfPaidTypeFinalAccountMSInt; j >= 1; j--) {
             //get values Protocol Type in list of Subscription
             String PTCurrentPayment = getElementByXpath(driver, "((//div/span[text()='Current Payment']/parent::div)/following-sibling::div[3]//span[contains(text(),'FIX')])[" + j + "]").getText();
-            System.out.println(PTCurrentPayment);
             return PTCurrentPayment;
         }
         return null;
     }
+
+
+
+
+
+    //check Mounthly Subscription
+    public void checkMounthlySubcriptionFinalAccount() throws Exception {
+        int totalPriceMS = 0;
+        int totalPriceSessionsMS = 0;
+        for (int i = 1; i <= quantityOfTypeSubscriptionInt; i++) {
+            //get values Price in list of Subscription
+            String priceListSubscription = getElementByXpath(driver, "(((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])/../following-sibling::div[2]/p[contains(text(),'$')])["+i+"]").getText();
+            String ePriceListSubscription = priceListSubscription.replaceAll("[^0-9]", "");
+            int iPriceListSubscription = Integer.parseInt(ePriceListSubscription);
+            totalPriceMS = iPriceListSubscription+totalPriceMS;
+
+            //get values Price Sessions in list of Subscription
+            String priceSessionsListSubscription = getElementByXpath(driver, "(//div/p[text()='Price: $'])["+i+"]").getText();
+            String ePriceSessionsListSubscription = priceSessionsListSubscription.replaceAll("[^0-9]", "");
+            int iPriceSessionsListSubscription = Integer.parseInt(ePriceSessionsListSubscription);
+            totalPriceSessionsMS = iPriceSessionsListSubscription+totalPriceSessionsMS;
+        }
+
+        int totalMSFromList = totalPriceMS+totalPriceSessionsMS;
+        String getMS = getElementByXpath(driver, "//div/span[text()='Monthly Subscription']/following-sibling::*").getText();
+        String eGetMS = getMS.replaceAll("[^0-9]", "");
+        int iGetMS = Integer.parseInt(eGetMS);
+
+        if(totalMSFromList!=iGetMS){
+            throw new Exception("Value of Mounthly Subscription is not correct");
+        }
+    }
+
+
+
+
+
+    //check Current Payment
+/*    public void checkCurrentPaymentFinalAccount() throws Exception {
+        int totalPriceMS = 0;
+        int totalPriceSessionsMS = 0;
+        for (int i = 1; i <= quantityOfTypeSubscriptionInt; i++) {
+            //get values Price in list of Subscription
+            String priceListSubscription = getElementByXpath(driver, "(((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])/../following-sibling::div[2]/p[contains(text(),'$')])["+i+"]").getText();
+            String ePriceListSubscription = priceListSubscription.replaceAll("[^0-9]", "");
+            int iPriceListSubscription = Integer.parseInt(ePriceListSubscription);
+            totalPriceMS = iPriceListSubscription+totalPriceMS;
+
+            //get values Price Sessions in list of Subscription
+            String priceSessionsListSubscription = getElementByXpath(driver, "(//div/p[text()='Price: $'])["+i+"]").getText();
+            String ePriceSessionsListSubscription = priceSessionsListSubscription.replaceAll("[^0-9]", "");
+            int iPriceSessionsListSubscription = Integer.parseInt(ePriceSessionsListSubscription);
+            totalPriceSessionsMS = iPriceSessionsListSubscription+totalPriceSessionsMS;
+        }
+
+        int totalMSFromList = totalPriceMS+totalPriceSessionsMS;
+        String getMS = getElementByXpath(driver, "//div/span[text()='Monthly Subscription']/following-sibling::*").getText();
+        String eGetMS = getMS.replaceAll("[^0-9]", "");
+        int iGetMS = Integer.parseInt(eGetMS);
+
+        if(totalMSFromList!=iGetMS){
+            throw new Exception("Value of Mounthly Subscription is not correct");
+        }
+    }*/
+
+
 }

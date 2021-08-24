@@ -123,6 +123,7 @@ public class CustomSteps extends FinalAccount {
     @Given("check Final Account")
     public void checkFinalAccount() throws Exception {
         checkProtocolTypeFinalAccount();
+        checkMounthlySubcriptionFinalAccount();
     }
 
 
