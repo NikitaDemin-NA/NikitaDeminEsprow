@@ -20,7 +20,6 @@ public class UICustomSteps {
     int quantityOfTypeSubscriptionInt;
     int quantityOfTypeFinalAccountCPInt;
     int quantityOfPaidTypeFinalAccountMSInt;
-    int paidInt;
 
 
     public void getPageInWindows() {
@@ -260,6 +259,8 @@ public class UICustomSteps {
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(selector)));
     }
+
+
 }
 
 

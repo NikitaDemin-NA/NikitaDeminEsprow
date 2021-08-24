@@ -8,7 +8,6 @@ public class FinalAccount extends UICustomSteps {
 
     //check of values Protocol Type
     public void checkProtocolTypeFinalAccount() throws Exception {
-        paidInt = quantityOfPaidTypeFinalAccountMSInt;
 
         //check a quantity of values Protocol Type
         checkQuantityPT();
@@ -53,8 +52,8 @@ public class FinalAccount extends UICustomSteps {
 
     //for Paid Exchange check Protocol Type
     public void checkPaidExchange() throws Exception {
-        if(paidInt!=0){
-            for (int p = 1; p <= paidInt; p++) {
+        if(quantityOfPaidTypeFinalAccountMSInt!=0){
+            for (int p = 1; p <= quantityOfPaidTypeFinalAccountMSInt; p++) {
                 //get values Protocol Type in list of Subscription
                 String PTListSubscription = getElementByXpath(driver, "((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])[" + p + "]").getText();
                 System.out.println(PTListSubscription);
@@ -72,7 +71,7 @@ public class FinalAccount extends UICustomSteps {
 
     //for Unpaid Exchange check Protocol Type
     public void checkUnPaidExchange() throws Exception {
-        for (int i = 1 + paidInt; i <= quantityOfTypeSubscriptionInt; i++) {
+        for (int i = 1 + quantityOfPaidTypeFinalAccountMSInt; i <= quantityOfTypeSubscriptionInt; i++) {
             //get values Protocol Type in list of Subscription
             String PTListSubscription = getElementByXpath(driver, "((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])[" + i + "]").getText();
             System.out.println(PTListSubscription);
@@ -89,7 +88,7 @@ public class FinalAccount extends UICustomSteps {
     }
 
     public String reversePTCurrentPayment() throws InterruptedException {
-        for (int j = quantityOfTypeSubscriptionInt - paidInt; j >= 1; j--) {
+        for (int j = quantityOfTypeSubscriptionInt - quantityOfPaidTypeFinalAccountMSInt; j >= 1; j--) {
             //get values Protocol Type in list of Subscription
             String PTCurrentPayment = getElementByXpath(driver, "((//div/span[text()='Current Payment']/parent::div)/following-sibling::div[3]//span[contains(text(),'FIX')])[" + j + "]").getText();
             System.out.println(PTCurrentPayment);
