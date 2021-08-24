@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 
-public class CustomSteps extends UICustomSteps {
+public class CustomSteps extends FinalAccount {
 
 
     @Given("open page")
