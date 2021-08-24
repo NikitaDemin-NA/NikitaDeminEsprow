@@ -82,8 +82,7 @@ formatter.match({
   "location": "steps.CustomSteps.checkFinalAccount()"
 });
 formatter.result({
-  "error_message": "java.lang.Exception: values of Protocol Type is not correct\n\tat steps.UICustomSteps.checkProtocolTypeFinalAccount(UICustomSteps.java:291)\n\tat steps.CustomSteps.checkFinalAccount(CustomSteps.java:125)\n\tat ✽.check Final Account(file:///Users/andrei/IdeaProjects/NikitaDeminEsprow/src/main/resources/features/Check%20adding%20subscription.feature:18)\n",
-  "status": "failed"
+  "status": "passed"
 });
 formatter.step({
   "name": "wait 4 seconds",
@@ -93,7 +92,7 @@ formatter.match({
   "location": "steps.CustomSteps.waitSecond(long)"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.step({
   "name": "close browser",
@@ -103,6 +102,6 @@ formatter.match({
   "location": "steps.CustomSteps.tearDown()"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 });
