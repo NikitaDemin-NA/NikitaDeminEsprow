@@ -69,49 +69,45 @@ public class CustomSteps extends UICustomSteps {
             }
 
             try{
-                WebDriverWait wait = new WebDriverWait(driver,3);
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'You don')]")));
+                waitForElementToAppear(driver, "//div[contains(text(),'You don')]", 3);
+                quantityOfNewExchanges=0;
             } catch (Exception e){
-                List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//span[text()='[Exchange not created yet]']"));
+                List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//input[@type='checkbox']"));
                 quantityOfNewExchanges = checkNewExchanges.size();
+                quantityOfNewExchanges--;
             }
 
         }
     }
 
 
-    @Given("click on \"Add Exchange\" button")
-    public void clickAddExchange() throws Exception {
-        WebElement test = driver.findElement(By.xpath("//div[text()='TRIAL']"));
-        test.click();
-        WebElement clickAddExchangeButton = driver.findElement(By.xpath("//button[text()='Add Exchange']"));
-        clickAddExchangeButton.click();
-        if(getElementByXpath(driver,"//h2[text()='Add New Exchange']") == null){
-            throw new Exception("pop-up window \"Add New Exchange\" doesn't open");
+    @Given("add {int} new Exchange with {string} Protocol Type and {int} Number of Sessions")
+    public void AddNewExchange(int quantityNewEchange, String protocolType, int numAddNewExchange)  throws Exception {
+        for (int i = 0; i < quantityNewEchange; i++) {
+            clickAddExchange();
+            this.numAddNewExchange = numAddNewExchange;
+
+            checkQuantityProtocolType(6);
+
+            WebElement clickProtocolType = driver.findElement(By.xpath("//div/div[text()='"+protocolType+"']"));
+            clickProtocolType.click();
+
+            //steps before adding Number of Sessions
+            checkNumberOfSessions();
+            checkNumberOfProtocol("$50.0");
+            checkNumberOfSessions("$0.0");
+            checkNumberOfTotal("$50.0");
+            //click on "+" button
+            clickOnPlusButton(numAddNewExchange);
+
+            //steps after adding Number of Sessions
+            checkNewNumberOfSessions(numAddNewExchange);
+            checkNewNumberOfTotal(numAddNewExchange);
+
+            //click on "Add" button
+            clickOnAddButton();
+
         }
-    }
-
-    @Given("add new Exchange with {int} Number of Sessions")
-    public void AddNewExchange(int numAddNewExchange) throws Exception {
-        this.numAddNewExchange = numAddNewExchange;
-        WebElement chooseProtocolType = driver.findElement(By.xpath("//div/div[text()='Protocol type']/parent::div/input"));
-        chooseProtocolType.click();
-
-        //steps before adding Number of Sessions
-        checkQuantityProtocolType();
-        checkNumberOfSessions();
-        checkNumberOfProtocol("$50.0");
-        checkNumberOfSessions("$0.0");
-        checkNumberOfTotal("$50.0");
-        //click on "+" button
-        clickOnPlusButton(numAddNewExchange);
-
-        //steps after adding Number of Sessions
-        checkNewNumberOfSessions(numAddNewExchange);
-        checkNewNumberOfTotal(numAddNewExchange);
-
-        //click on "Add" button
-        clickOnAddButton();
 
         //check new Exchange
         String url = driver.getCurrentUrl();
@@ -119,7 +115,7 @@ public class CustomSteps extends UICustomSteps {
             List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//span[text()='[Exchange not created yet]']"));
             int quantityOfNewExchangesNew = checkNewExchanges.size();
 
-            if (quantityOfNewExchangesNew != quantityOfNewExchanges+numAddNewExchange) {
+            if (quantityOfNewExchangesNew != quantityOfNewExchanges+quantityNewEchange) {
                 throw new Exception("New Exchange didn't create");
             }
         }

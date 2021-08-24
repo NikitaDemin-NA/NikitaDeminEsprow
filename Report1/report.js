@@ -65,21 +65,11 @@ formatter.scenario({
   ]
 });
 formatter.step({
-  "name": "click on \"Add Exchange\" button",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "steps.CustomSteps.clickAddExchange()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "add new Exchange with 1 Number of Sessions",
+  "name": "add 3 new Exchange with \"FIX 4.2\" Protocol Type and 3 Number of Sessions",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "steps.CustomSteps.AddNewExchange(int)"
+  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
 });
 formatter.result({
   "status": "passed"

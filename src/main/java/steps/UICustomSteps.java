@@ -1,11 +1,13 @@
 package steps;
 
+import io.cucumber.java.en.Given;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -147,10 +149,13 @@ public class UICustomSteps {
 
 
     //check a quantity of Protocol Type
-    public void checkQuantityProtocolType() throws Exception {
+    public void checkQuantityProtocolType(int quantityOfProtocolType) throws Exception {
+        WebElement chooseProtocolType = driver.findElement(By.xpath("//div/div[text()='Protocol type']/parent::div/input"));
+        chooseProtocolType.click();
+
         List<WebElement> findquantityProtocolType = getElementsByXpath(driver, "//div/div[contains(text(),'FIX')]");
         int quantityProtocolType = findquantityProtocolType.size();
-        if (quantityProtocolType != 6) {
+        if (quantityProtocolType != quantityOfProtocolType) {
             throw new Exception("A quantity of Protocol Type is not correct");
         }
     }
@@ -159,8 +164,6 @@ public class UICustomSteps {
     //check number of sessions
     public void checkNumberOfSessions() throws Exception {
         String numberOfSessions = getElementByXpath(driver, "//div/span[text()='Number of Sessions']/following-sibling::div/div[2]").getText();
-        WebElement clickProtocolType = driver.findElement(By.xpath("//div/div[contains(text(),'FIX')][1]"));
-        clickProtocolType.click();
 
         if (!numberOfSessions.equals("0")) {
             throw new Exception("number of Sessions is not \"0\"");
@@ -189,7 +192,7 @@ public class UICustomSteps {
 
     //check value of sessions
     public void checkNumberOfSessions(String numberOfSess) throws Exception {
-        String numberOfSessions = getElementByXpath(driver, "//div/span[text()='Sessions:']/following-sibling::span").getText();
+        String numberOfSessions = getElementByXpath(driver, "(//div/span[text()='Sessions:']/following-sibling::span)[last()]").getText();
 
         if (!numberOfSessions.equals(numberOfSess)) {
             throw new Exception("value of Sessions is not "+numberOfSess);
@@ -199,7 +202,7 @@ public class UICustomSteps {
     //check new value of sessions
     public void checkNewNumberOfSessions(int numAddNewExchange) throws Exception {
         this.numAddNewExchange = numAddNewExchange;
-        String numberOfSessions = getElementByXpath(driver, "//div/span[text()='Sessions:']/following-sibling::span").getText();
+        String numberOfSessions = getElementByXpath(driver, "(//div/span[text()='Sessions:']/following-sibling::span)[last()]").getText();
         String parseNumberOfSessions = numberOfSessions.replaceAll("[^0-9]", "");
 
         if (Integer.parseInt(parseNumberOfSessions) != numAddNewExchange*100) {
@@ -256,6 +259,24 @@ public class UICustomSteps {
                 && (quantityOfTypeFinalAccountMSInt != quantityOfTypeFinalAccountCPInt)) {
             throw new Exception("a quantity of values Protocol Type is not correct");
         }
+    }
+
+    //click on "Add Exchange" button"
+    public void clickAddExchange() throws Exception {
+        WebElement test = driver.findElement(By.xpath("//div[text()='TRIAL']"));
+        test.click();
+        WebElement clickAddExchangeButton = driver.findElement(By.xpath("//button[text()='Add Exchange']"));
+        clickAddExchangeButton.click();
+        if(getElementByXpath(driver,"//h2[text()='Add New Exchange']") == null){
+            throw new Exception("pop-up window \"Add New Exchange\" doesn't open");
+        }
+    }
+
+
+    //Explicit Wait
+    public static void waitForElementToAppear(WebDriver driver, String selector, long timeOutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(selector)));
     }
 
 

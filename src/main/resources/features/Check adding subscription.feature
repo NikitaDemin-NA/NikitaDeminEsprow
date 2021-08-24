@@ -13,8 +13,8 @@
     Scenario: add Exchange subscription
 
       #step1
-      When click on "Add Exchange" button
-      Then add new Exchange with 1 Number of Sessions
+      #When click on "Add Exchange" button
+      Then add 3 new Exchange with "FIX 4.2" Protocol Type and 3 Number of Sessions
       Then check Final Account
 
 
