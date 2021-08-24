@@ -243,8 +243,22 @@ public class UICustomSteps {
     }
 
 
-    //check a quantity of values Protocol Type
+    //check of values Protocol Type
     public void checkProtocolTypeFinalAccount() throws Exception {
+        paidInt = quantityOfPaidTypeFinalAccountMSInt;
+
+        //check a quantity of values Protocol Type
+        checkQuantityPT();
+
+        //for Paid Exchange check Protocol Type
+        checkPaidExchange();
+
+        //for Unpaid Exchange check Protocol Type
+        checkUnPaidExchange();
+    }
+
+    //check a quantity of values Protocol Type
+    public void checkQuantityPT() throws Exception {
         try {
             //take a quantity of PAID values Protocol Type in list of Subscription
             List<WebElement> quantityOfPaidTypeFinalAccountMS = getElementsByXpath(driver, "//span[text()='Paid']");
@@ -272,27 +286,43 @@ public class UICustomSteps {
         } catch (Exception e) {
             throw new Exception("a quantity of values Protocol Type is not correct");
         }
+    }
 
-        try {
-            paidInt = quantityOfPaidTypeFinalAccountMSInt;
-            for (int i = 1 + paidInt; i <= quantityOfTypeSubscriptionInt; i++) {
+    //for Paid Exchange check Protocol Type
+    public void checkPaidExchange() throws Exception {
+        if(paidInt!=0){
+            for (int p = 1; p <= paidInt; p++) {
                 //get values Protocol Type in list of Subscription
-                String PTListSubscription = getElementByXpath(driver, "((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])[" + i + "]").getText();
+                String PTListSubscription = getElementByXpath(driver, "((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])[" + p + "]").getText();
                 System.out.println(PTListSubscription);
 
                 //get values Protocol Type in list of Final Account Mounthly Subscription
-                String PTMounthlySubscription = getElementByXpath(driver, "((//div/span[text()='Monthly Subscription']/parent::div)/following-sibling::div[3]//p[contains(text(),'FIX')])[" + i + "]").getText();
+                String PTMounthlySubscription = getElementByXpath(driver, "((//div/span[text()='Monthly Subscription']/parent::div)/following-sibling::div[3]//p[contains(text(),'FIX')])["+ p +"]").getText();
                 System.out.println(PTMounthlySubscription);
 
-                if (reversePTCurrentPayment().equals(PTMounthlySubscription)) {
-                    if (PTListSubscription.equals(PTMounthlySubscription)) {
-                    }
+                if(!PTListSubscription.equals(PTMounthlySubscription)){
+                    throw new Exception("trouble with check of Paid Exchange");
                 }
             }
-        } catch (Exception e) {
-            throw new Exception("values of Protocol Type is not correct");
         }
+    }
 
+    //for Unpaid Exchange check Protocol Type
+    public void checkUnPaidExchange() throws Exception {
+        for (int i = 1 + paidInt; i <= quantityOfTypeSubscriptionInt; i++) {
+            //get values Protocol Type in list of Subscription
+            String PTListSubscription = getElementByXpath(driver, "((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])[" + i + "]").getText();
+            System.out.println(PTListSubscription);
+
+            //get values Protocol Type in list of Final Account Mounthly Subscription
+            String PTMounthlySubscription = getElementByXpath(driver, "((//div/span[text()='Monthly Subscription']/parent::div)/following-sibling::div[3]//p[contains(text(),'FIX')])[" + i + "]").getText();
+            System.out.println(PTMounthlySubscription);
+
+            if ((!reversePTCurrentPayment().equals(PTMounthlySubscription))
+                && ((!PTListSubscription.equals(PTMounthlySubscription)))) {
+                throw new Exception("trouble with check of Paid Exchange");
+            }
+        }
     }
 
     public String reversePTCurrentPayment() throws InterruptedException {
