@@ -84,9 +84,8 @@ public class CustomSteps extends UICustomSteps {
     @Given("add {int} new Exchange with {string} Protocol Type and {int} Number of Sessions")
     public void AddNewExchange(int quantityNewEchange, String protocolType, int numAddNewExchange)  throws Exception {
         for (int i = 0; i < quantityNewEchange; i++) {
-            clickAddExchange();
             this.numAddNewExchange = numAddNewExchange;
-
+            clickAddExchange();
             checkQuantityProtocolType(6);
 
             WebElement clickProtocolType = driver.findElement(By.xpath("//div/div[text()='"+protocolType+"']"));
@@ -106,7 +105,6 @@ public class CustomSteps extends UICustomSteps {
 
             //click on "Add" button
             clickOnAddButton();
-
         }
 
         //check new Exchange
@@ -124,7 +122,7 @@ public class CustomSteps extends UICustomSteps {
 
     @Given("check Final Account")
     public void checkFinalAccount() throws Exception {
-        checkQuantityProtocolTypeFinalAccount();
+        checkProtocolTypeFinalAccount();
     }
 
 

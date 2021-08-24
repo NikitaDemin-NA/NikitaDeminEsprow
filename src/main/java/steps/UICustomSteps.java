@@ -1,6 +1,5 @@
 package steps;
 
-import io.cucumber.java.en.Given;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +17,8 @@ public class UICustomSteps {
     String emailField;
     int numAddNewExchange;
     int quantityOfNewExchanges;
+    int quantityOfTypeSubscriptionInt;
+    int quantityOfTypeFinalAccountCPInt;
 
 
     public void getPageInWindows() {
@@ -241,25 +242,75 @@ public class UICustomSteps {
 
 
     //check a quantity of values Protocol Type
-    public void checkQuantityProtocolTypeFinalAccount() throws Exception {
-        //take a quantity of values Protocol Type in list of Subscription
-        List<WebElement> quantityOfTypeSubscription = getElementsByXpath(driver, "//input [@type='checkbox']");
-        int quantityOfTypeSubscriptionInt = quantityOfTypeSubscription.size();
-        quantityOfTypeSubscriptionInt--;
+    public void checkProtocolTypeFinalAccount() throws Exception {
 
-        //take a quantity of values Protocol Type in list of Final Account Mounthly Subscription
-        List<WebElement> quantityOfTypeFinalAccountMS = getElementsByXpath(driver, "(//div/span[text()='Monthly Subscription']/parent::div)[1]/following-sibling::div[3]//p[contains(text(),'FIX')]");
-        int quantityOfTypeFinalAccountMSInt = quantityOfTypeFinalAccountMS.size();
 
-        //take a quantity of values Protocol Type in list of Final Account Current Payment
-        List<WebElement> quantityOfTypeFinalAccountCP = getElementsByXpath(driver, "(//div/span[text()='Current Payment']/parent::div)[1]/following-sibling::div[3]//span[contains(text(),'FIX')]");
-        int quantityOfTypeFinalAccountCPInt = quantityOfTypeFinalAccountCP.size();
+        try {
 
-        if ((quantityOfTypeSubscriptionInt != quantityOfTypeFinalAccountMSInt)
-                && (quantityOfTypeFinalAccountMSInt != quantityOfTypeFinalAccountCPInt)) {
+            //take a quantity of values Protocol Type in list of Subscription
+            List<WebElement> quantityOfTypeSubscription = getElementsByXpath(driver, "//input [@type='checkbox' and @value='false']");
+            quantityOfTypeSubscriptionInt = quantityOfTypeSubscription.size();
+            quantityOfTypeSubscriptionInt--;
+
+            //take a quantity of values Protocol Type in list of Final Account Mounthly Subscription
+            List<WebElement> quantityOfTypeFinalAccountMS = getElementsByXpath(driver, "(//div/span[text()='Monthly Subscription']/parent::div)[1]/following-sibling::div[3]//p[contains(text(),'FIX')]");
+            int quantityOfTypeFinalAccountMSInt = quantityOfTypeFinalAccountMS.size();
+
+            //take a quantity of values Protocol Type in list of Final Account Current Payment
+            List<WebElement> quantityOfTypeFinalAccountCP = getElementsByXpath(driver, "(//div/span[text()='Current Payment']/parent::div)[1]/following-sibling::div[3]//span[contains(text(),'FIX')]");
+            quantityOfTypeFinalAccountCPInt = quantityOfTypeFinalAccountCP.size();
+
+            //check
+            if ((quantityOfTypeSubscriptionInt == quantityOfTypeFinalAccountMSInt)
+                    && (quantityOfTypeFinalAccountMSInt == quantityOfTypeFinalAccountCPInt)) {
+            }
+        } catch (Exception e) {
             throw new Exception("a quantity of values Protocol Type is not correct");
         }
+
+        try {
+            if(quantityOfTypeSubscriptionInt!=0){
+            for (int i = 1; i <= quantityOfTypeSubscriptionInt; i++) {
+                //get values Protocol Type in list of Subscription
+                String PTListSubscription = getElementByXpath(driver, "((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])[" + i + "]").getText();
+                System.out.println(PTListSubscription);
+
+                //get values Protocol Type in list of Subscription
+                String PTMounthlySubscription = getElementByXpath(driver, "((//div/span[text()='Monthly Subscription']/parent::div)/following-sibling::div[3]//p[contains(text(),'FIX')])[" + i + "]").getText();
+                System.out.println(PTMounthlySubscription);
+
+                if (PTListSubscription.equals(PTMounthlySubscription)){
+                } if (reversePTCurrentPayment().equals(PTMounthlySubscription)){
+                }
+            }
+
+
+
+            }
+        } catch (Exception e){
+            throw new Exception("values of Protocol Type is not correct");
+        }
+
     }
+
+    public String reversePTCurrentPayment() throws InterruptedException {
+        List<WebElement> listQuantityPaidExchanges = getElementsByXpath(driver, "//span[text()='Paid']");
+        int quantityPaidExchanges = listQuantityPaidExchanges.size();
+
+        if(quantityOfTypeSubscriptionInt==quantityOfTypeFinalAccountCPInt) {
+            for (int j = quantityOfTypeSubscriptionInt - quantityPaidExchanges; j >= 1; j--) {
+                //get values Protocol Type in list of Subscription
+                String PTCurrentPayment = getElementByXpath(driver, "((//div/span[text()='Current Payment']/parent::div)/following-sibling::div[3]//span[contains(text(),'FIX')])[" + j + "]").getText();
+                System.out.println(PTCurrentPayment);
+                return PTCurrentPayment;
+            }
+        } else {
+            quantityOfTypeSubscriptionInt--;
+        }
+        return null;
+    }
+
+
 
     //click on "Add Exchange" button"
     public void clickAddExchange() throws Exception {
