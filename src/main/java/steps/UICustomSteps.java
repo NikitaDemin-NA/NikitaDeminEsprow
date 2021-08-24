@@ -19,6 +19,8 @@ public class UICustomSteps {
     int quantityOfNewExchanges;
     int quantityOfTypeSubscriptionInt;
     int quantityOfTypeFinalAccountCPInt;
+    int quantityOfPaidTypeFinalAccountMSInt;
+    int paidInt;
 
 
     public void getPageInWindows() {
@@ -124,11 +126,11 @@ public class UICustomSteps {
         WebElement signin = driver.findElement(By.xpath("//button[text()='Sign In']"));
         signin.click();
 
-        for (int i = 0; i <1 ; i++) {
+        for (int i = 0; i < 1; i++) {
             try {
                 String url = driver.getCurrentUrl();
-                if(url.equals("https://spa-dev.etpmarkets.com:3000/app/subscription")){
-                } else if(url.equals("https://spa-dev.etpmarkets.com:3000/app/exchange")){
+                if (url.equals("https://spa-dev.etpmarkets.com:3000/app/subscription")) {
+                } else if (url.equals("https://spa-dev.etpmarkets.com:3000/app/exchange")) {
                 }
             } catch (Exception e) {
                 Thread.sleep(3000);
@@ -138,12 +140,12 @@ public class UICustomSteps {
         try {
             //login on top of the right corner
             clickLoginButton();
-            String login = getElementByXpath(driver,"//span/img[@alt='user image']//following-sibling::div").getText();
+            String login = getElementByXpath(driver, "//span/img[@alt='user image']//following-sibling::div").getText();
             //login on left side of site
-            String  loginName = getElementByXpath(driver,"//p[text()='"+this.emailField+"']/parent::div/p[1]").getText();
-            if (login.equals(loginName)){
+            String loginName = getElementByXpath(driver, "//p[text()='" + this.emailField + "']/parent::div/p[1]").getText();
+            if (login.equals(loginName)) {
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("Log In is not correct");
         }
     }
@@ -186,7 +188,7 @@ public class UICustomSteps {
         String numberOfProtocol = getElementByXpath(driver, "//div/span[text()='Protocol:']/following-sibling::span").getText();
 
         if (!numberOfProtocol.equals(numberOfProt)) {
-            throw new Exception("value of Protocol is not "+numberOfProt);
+            throw new Exception("value of Protocol is not " + numberOfProt);
         }
     }
 
@@ -196,7 +198,7 @@ public class UICustomSteps {
         String numberOfSessions = getElementByXpath(driver, "(//div/span[text()='Sessions:']/following-sibling::span)[last()]").getText();
 
         if (!numberOfSessions.equals(numberOfSess)) {
-            throw new Exception("value of Sessions is not "+numberOfSess);
+            throw new Exception("value of Sessions is not " + numberOfSess);
         }
     }
 
@@ -206,8 +208,8 @@ public class UICustomSteps {
         String numberOfSessions = getElementByXpath(driver, "(//div/span[text()='Sessions:']/following-sibling::span)[last()]").getText();
         String parseNumberOfSessions = numberOfSessions.replaceAll("[^0-9]", "");
 
-        if (Integer.parseInt(parseNumberOfSessions) != numAddNewExchange*100) {
-            throw new Exception("value of Sessions is not $"+numAddNewExchange*10+".0");
+        if (Integer.parseInt(parseNumberOfSessions) != numAddNewExchange * 100) {
+            throw new Exception("value of Sessions is not $" + numAddNewExchange * 10 + ".0");
         }
     }
 
@@ -217,7 +219,7 @@ public class UICustomSteps {
         String numberOfTotal = getElementByXpath(driver, "//div/span[text()='Total cost:']/following-sibling::span").getText();
 
         if (!numberOfTotal.equals(numberOfTot)) {
-            throw new Exception("value of Sessions is not "+numberOfTot);
+            throw new Exception("value of Sessions is not " + numberOfTot);
         }
     }
 
@@ -228,8 +230,8 @@ public class UICustomSteps {
         String parseNumberOfTotal = numberOfTotal.replaceAll("[^0-9]", "");
 
 
-        if (Integer.parseInt(parseNumberOfTotal)!= 500+(numAddNewExchange*100)) {
-            throw new Exception("value of Total is not $"+(500+(numAddNewExchange*100))+".0");
+        if (Integer.parseInt(parseNumberOfTotal) != 500 + (numAddNewExchange * 100)) {
+            throw new Exception("value of Total is not $" + (500 + (numAddNewExchange * 100)) + ".0");
         }
     }
 
@@ -243,13 +245,10 @@ public class UICustomSteps {
 
     //check a quantity of values Protocol Type
     public void checkProtocolTypeFinalAccount() throws Exception {
-
-
         try {
             //take a quantity of PAID values Protocol Type in list of Subscription
-            List<WebElement> quantityOfPaidTypeFinalAccountMS = getElementsByXpath(driver, "(//div/span[text()='Monthly Subscription']/parent::div)[1]/following-sibling::div[3]//p[contains(text(),'FIX')]");
-            int quantityOfPaidTypeFinalAccountMSInt = quantityOfPaidTypeFinalAccountMS.size();
-
+            List<WebElement> quantityOfPaidTypeFinalAccountMS = getElementsByXpath(driver, "//span[text()='Paid']");
+            quantityOfPaidTypeFinalAccountMSInt = quantityOfPaidTypeFinalAccountMS.size();
 
             //take a quantity of values Protocol Type in list of Subscription
             List<WebElement> quantityOfTypeSubscription = getElementsByXpath(driver, "//input [@type='checkbox' and @value='false']");
@@ -267,54 +266,44 @@ public class UICustomSteps {
 
             //check
             if ((quantityOfTypeSubscriptionInt != quantityOfTypeFinalAccountMSInt)
-                    & (quantityOfTypeFinalAccountCPInt-quantityOfPaidTypeFinalAccountMSInt != quantityOfTypeFinalAccountMSInt)) {
+                    & (quantityOfTypeFinalAccountCPInt - quantityOfPaidTypeFinalAccountMSInt != quantityOfTypeFinalAccountMSInt)) {
                 throw new Exception();
-
             }
         } catch (Exception e) {
             throw new Exception("a quantity of values Protocol Type is not correct");
         }
 
         try {
-            if(quantityOfTypeSubscriptionInt!=0) {
-                for (int i = 1; i <= quantityOfTypeSubscriptionInt; i++) {
-                    //get values Protocol Type in list of Subscription
-                    String PTListSubscription = getElementByXpath(driver, "((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])[" + i + "]").getText();
-                    System.out.println(PTListSubscription);
+            paidInt = quantityOfPaidTypeFinalAccountMSInt;
+            for (int i = 1 + paidInt; i <= quantityOfTypeSubscriptionInt; i++) {
+                //get values Protocol Type in list of Subscription
+                String PTListSubscription = getElementByXpath(driver, "((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])[" + i + "]").getText();
+                System.out.println(PTListSubscription);
 
-                    //get values Protocol Type in list of Final Account Mounthly Subscription
-                    String PTMounthlySubscription = getElementByXpath(driver, "((//div/span[text()='Monthly Subscription']/parent::div)/following-sibling::div[3]//p[contains(text(),'FIX')])[" + i + "]").getText();
-                    System.out.println(PTMounthlySubscription);
+                //get values Protocol Type in list of Final Account Mounthly Subscription
+                String PTMounthlySubscription = getElementByXpath(driver, "((//div/span[text()='Monthly Subscription']/parent::div)/following-sibling::div[3]//p[contains(text(),'FIX')])[" + i + "]").getText();
+                System.out.println(PTMounthlySubscription);
 
-                    if (reversePTCurrentPayment().equals(PTMounthlySubscription)) {
-                        if (PTListSubscription.equals(PTMounthlySubscription)) {
-                        }
+                if (reversePTCurrentPayment().equals(PTMounthlySubscription)) {
+                    if (PTListSubscription.equals(PTMounthlySubscription)) {
                     }
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new Exception("values of Protocol Type is not correct");
         }
 
     }
 
     public String reversePTCurrentPayment() throws InterruptedException {
-        /*List<WebElement> listQuantityPaidExchanges = getElementsByXpath(driver, "//span[text()='Paid']");
-        int quantityPaidExchanges = listQuantityPaidExchanges.size();*/
-
-        if(quantityOfTypeSubscriptionInt==quantityOfTypeFinalAccountCPInt) {
-            for (int j = quantityOfTypeSubscriptionInt; j >= 1; j--) {
-                //get values Protocol Type in list of Subscription
-                String PTCurrentPayment = getElementByXpath(driver, "((//div/span[text()='Current Payment']/parent::div)/following-sibling::div[3]//span[contains(text(),'FIX')])[" + j + "]").getText();
-                System.out.println(PTCurrentPayment);
-                return PTCurrentPayment;
-            }
-        } else {
-            quantityOfTypeSubscriptionInt--;
+        for (int j = quantityOfTypeSubscriptionInt - paidInt; j >= 1; j--) {
+            //get values Protocol Type in list of Subscription
+            String PTCurrentPayment = getElementByXpath(driver, "((//div/span[text()='Current Payment']/parent::div)/following-sibling::div[3]//span[contains(text(),'FIX')])[" + j + "]").getText();
+            System.out.println(PTCurrentPayment);
+            return PTCurrentPayment;
         }
         return null;
     }
-
 
 
     //click on "Add Exchange" button"
@@ -323,7 +312,7 @@ public class UICustomSteps {
         test.click();
         WebElement clickAddExchangeButton = driver.findElement(By.xpath("//button[text()='Add Exchange']"));
         clickAddExchangeButton.click();
-        if(getElementByXpath(driver,"//h2[text()='Add New Exchange']") == null){
+        if (getElementByXpath(driver, "//h2[text()='Add New Exchange']") == null) {
             throw new Exception("pop-up window \"Add New Exchange\" doesn't open");
         }
     }
