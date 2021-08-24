@@ -124,6 +124,7 @@ public class CustomSteps extends FinalAccount {
     public void checkFinalAccount() throws Exception {
         checkProtocolTypeFinalAccount();
         checkMounthlySubcriptionFinalAccount();
+        checkCurrentPaymentFinalAccount();
     }
 
 

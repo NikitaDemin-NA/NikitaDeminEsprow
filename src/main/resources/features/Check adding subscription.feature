@@ -14,7 +14,7 @@
 
       #step1
       #When click on "Add Exchange" button
-      Then add 3 new Exchange with "FIX 4.2" Protocol Type and 1 Number of Sessions
+      Then add 8 new Exchange with "FIX 4.2" Protocol Type and 1 Number of Sessions
       Then check Final Account
 
 

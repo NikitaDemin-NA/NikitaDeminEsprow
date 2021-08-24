@@ -93,9 +93,6 @@ public class FinalAccount extends UICustomSteps {
     }
 
 
-
-
-
     //check Mounthly Subscription
     public void checkMounthlySubcriptionFinalAccount() throws Exception {
         int totalPriceMS = 0;
@@ -114,47 +111,46 @@ public class FinalAccount extends UICustomSteps {
             totalPriceSessionsMS = iPriceSessionsListSubscription+totalPriceSessionsMS;
         }
 
-        int totalMSFromList = totalPriceMS+totalPriceSessionsMS;
-        String getMS = getElementByXpath(driver, "//div/span[text()='Monthly Subscription']/following-sibling::*").getText();
-        String eGetMS = getMS.replaceAll("[^0-9]", "");
-        int iGetMS = Integer.parseInt(eGetMS);
+        try {
+            int totalMSFromList = totalPriceMS + totalPriceSessionsMS;
+            String getMS = getElementByXpath(driver, "//div/span[text()='Monthly Subscription']/following-sibling::*").getText();
+            String eGetMS = getMS.replaceAll("[^0-9]", "");
+            int iGetMS = Integer.parseInt(eGetMS);
 
-        if(totalMSFromList!=iGetMS){
-            throw new Exception("Value of Mounthly Subscription is not correct");
+            if (totalMSFromList != iGetMS) {
+                throw new Exception("Value of Mounthly Subscription is not correct");
+            }
+        }catch (Exception e){
+            throw new Exception("Value of Mounthly Subscription is not correct / or Element \"Mounthly Subscription\" is not visible");
         }
     }
 
 
-
-
-
     //check Current Payment
-/*    public void checkCurrentPaymentFinalAccount() throws Exception {
-        int totalPriceMS = 0;
-        int totalPriceSessionsMS = 0;
+    public void checkCurrentPaymentFinalAccount() throws Exception {
+        int totalPriceCP = 0;
         for (int i = 1; i <= quantityOfTypeSubscriptionInt; i++) {
             //get values Price in list of Subscription
-            String priceListSubscription = getElementByXpath(driver, "(((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])/../following-sibling::div[2]/p[contains(text(),'$')])["+i+"]").getText();
-            String ePriceListSubscription = priceListSubscription.replaceAll("[^0-9]", "");
-            int iPriceListSubscription = Integer.parseInt(ePriceListSubscription);
-            totalPriceMS = iPriceListSubscription+totalPriceMS;
-
-            //get values Price Sessions in list of Subscription
-            String priceSessionsListSubscription = getElementByXpath(driver, "(//div/p[text()='Price: $'])["+i+"]").getText();
-            String ePriceSessionsListSubscription = priceSessionsListSubscription.replaceAll("[^0-9]", "");
-            int iPriceSessionsListSubscription = Integer.parseInt(ePriceSessionsListSubscription);
-            totalPriceSessionsMS = iPriceSessionsListSubscription+totalPriceSessionsMS;
+            String CPListSubscription = getElementByXpath(driver, "(//div/p[text()='Current Payment']/../p[contains(text(),'$')])["+i+"]").getText();
+            String eCPListSubscription = CPListSubscription.replaceAll("[^0-9]", "");
+            int iCPListSubscription = Integer.parseInt(eCPListSubscription);
+            totalPriceCP = iCPListSubscription+totalPriceCP;
         }
 
-        int totalMSFromList = totalPriceMS+totalPriceSessionsMS;
-        String getMS = getElementByXpath(driver, "//div/span[text()='Monthly Subscription']/following-sibling::*").getText();
-        String eGetMS = getMS.replaceAll("[^0-9]", "");
-        int iGetMS = Integer.parseInt(eGetMS);
+        try {
+            String getCP = getElementByXpath(driver, "//div/span[text()='Current Payment']/following-sibling::*").getText();
+            String eGetCP = getCP.replaceAll("[^0-9]", "");
+            int iGetCP = Integer.parseInt(eGetCP);
 
-        if(totalMSFromList!=iGetMS){
-            throw new Exception("Value of Mounthly Subscription is not correct");
+            if(totalPriceCP!=iGetCP){
+                throw new Exception("Value of Current Payment is not correct");
+            }
+        }catch (Exception e){
+            throw new Exception("Value of Current Payment is not correct / or Element \"Current Payment\" is not visible");
         }
-    }*/
+
+
+    }
 
 
 }
