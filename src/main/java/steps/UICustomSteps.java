@@ -27,6 +27,7 @@ public class UICustomSteps {
     int totalQuantitySessionsPO = 0;
     int iGetCP;
     int iGetMS;
+    int iAddExtraPriceSessionsListSubscription;
 
 
 

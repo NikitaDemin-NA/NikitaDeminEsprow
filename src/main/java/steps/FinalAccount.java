@@ -23,9 +23,6 @@ public class FinalAccount extends UICustomSteps {
     //check a quantity of values Protocol Type
     public void checkQuantityPT() throws Exception {
         try {
-
-
-
             //take a quantity of values Protocol Type in list of Subscription
             List<WebElement> quantityOfTypeSubscription = getElementsByXpath(driver, "//input [@type='checkbox' and @value='false']");
             quantityOfTypeSubscriptionInt = quantityOfTypeSubscription.size();
@@ -39,11 +36,6 @@ public class FinalAccount extends UICustomSteps {
             //take a quantity of values Protocol Type in list of Final Account Current Payment
             List<WebElement> quantityOfTypeFinalAccountCP = getElementsByXpath(driver, "(//div/span[text()='Current Payment']/parent::div)[1]/following-sibling::div[3]//span[contains(text(),'FIX')]");
             quantityOfTypeFinalAccountCPInt = quantityOfTypeFinalAccountCP.size();
-
-/*            //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-            //take a quantity of PAID values Protocol Type in list of Subscription
-            List<WebElement> quantityOfPaidTypeFinalAccountMS = getElementsByXpath(driver, "//*[text()='Paid']");
-            quantityOfPaidTypeFinalAccountMSInt = quantityOfPaidTypeFinalAccountMS.size();*/
 
             //check
             if ((quantityOfTypeSubscriptionInt != quantityOfTypeFinalAccountMSInt)
@@ -102,6 +94,7 @@ public class FinalAccount extends UICustomSteps {
     public void checkMounthlySubcriptionFinalAccount() throws Exception {
         totalAddPriceSessionsMS=0;
         totalPriceMS=0;
+        iAddExtraPriceSessionsListSubscription=0;
         for (int i = 1; i <= quantityOfTypeSubscriptionInt; i++) {
             //get values Price in list of Subscription
             String priceListSubscription = getElementByXpath(driver, "(((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])/../following-sibling::div[2]/p[contains(text(),'$')])["+i+"]").getText();
@@ -116,16 +109,26 @@ public class FinalAccount extends UICustomSteps {
             totalPriceSessionsMS = iPriceSessionsListSubscription+totalPriceSessionsMS;
 
             try{
+                for (int p = 1; p <=1 ; p++) {
+                    String addExtraPriceSessionsListSubscription = getElementByXpath(driver, "(((//div/p[text()='Price: $'])/following-sibling::div[2]/div[2]/p[contains(text(),'+')]))[" + p + "]").getText();
+                    String eAddExtraPriceSessionsListSubscription = addExtraPriceSessionsListSubscription.replaceAll("[^0-9]", "");
+                    iAddExtraPriceSessionsListSubscription = Integer.parseInt(eAddExtraPriceSessionsListSubscription);
+                }
+            } catch (Exception e){
+            }
+
+            try{
                 //get values Additional Price Sessions in list of Subscription
                 for (int p = 1; p <=1 ; p++) {
                     driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
                     waitForElementToAppear(driver, "((//div/p[text()='Price: $'])["+i+"]/following-sibling::div[2]/div[2])/span", 1);
+
+
                     String addPriceSessionsListSubscription = getElementByXpath(driver, "((//div/p[text()='Price: $'])["+i+"]/following-sibling::div[2]/div[2])/span").getText();
                     String eAddPriceSessionsListSubscription = addPriceSessionsListSubscription.replaceAll("[^0-9]", "");
-                    //totalAddPriceSessionsMS=0;
                     int iAddPriceSessionsListSubscription = Integer.parseInt(eAddPriceSessionsListSubscription);
                     int totalTest = 0;
-                    totalTest = (iAddPriceSessionsListSubscription * iPriceSessionsListSubscription);
+                    totalTest = ((iAddPriceSessionsListSubscription+iAddExtraPriceSessionsListSubscription) * iPriceSessionsListSubscription);
                     totalAddPriceSessionsMS = totalTest+totalAddPriceSessionsMS;
                 }
 

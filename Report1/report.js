@@ -65,46 +65,6 @@ formatter.scenario({
   ]
 });
 formatter.step({
-  "name": "delete all Exchanges",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.deleteAllEchanges()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "add 1 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "check Final Account",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.checkFinalAccount()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "pay for the Exchanges",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.payForTheExchange()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
   "name": "open Subscription page",
   "keyword": "And "
 });
@@ -115,7 +75,7 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "add 2 new Exchange with \"FIX 4.2\" Protocol Type and 3 Number of Sessions",
+  "name": "add 3 new Exchange with \"FIX 4.2\" Protocol Type and 7 Number of Sessions",
   "keyword": "Then "
 });
 formatter.match({
@@ -135,7 +95,27 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "wait 4 seconds",
+  "name": "add 3 extra Sessions for all Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.addExtraSessions(int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check Final Account",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.checkFinalAccount()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "wait 8 seconds",
   "keyword": "When "
 });
 formatter.match({

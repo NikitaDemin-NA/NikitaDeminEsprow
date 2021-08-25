@@ -89,6 +89,7 @@ public class CustomSteps extends FinalAccount {
     @Given("add {int} new Exchange with {string} Protocol Type and {int} Number of Sessions")
     public void AddNewExchange(int quantityNewEchange, String protocolType, int numAddNewExchange)  throws Exception {
         for (int i = 0; i < quantityNewEchange; i++) {
+            driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
             this.numAddNewExchange = numAddNewExchange;
             clickAddExchange();
             checkQuantityProtocolType(6);
@@ -179,6 +180,23 @@ public class CustomSteps extends FinalAccount {
             }
         }
     }
+
+    @Given("add {int} extra Sessions for all Exchanges")
+    public void addExtraSessions(int plus) throws Exception {
+        try {
+            for (int i = 1; i <= quantityOfTypeSubscriptionInt; i++) {
+                WebElement plusSessionsButton = driver.findElement(By.xpath("(//*[name()='svg']/*[name()='line']/parent::*[name()='svg']/parent::div)[" + i + "]"));
+                for (int j = 1; j <= plus; j++) {
+                    plusSessionsButton.click();
+
+                }
+            }
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            throw new Exception("error with add " + plus + " extra Sessions");
+        }
+    }
+
 
 
     @Given("wait {long} seconds")
