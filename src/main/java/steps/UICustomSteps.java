@@ -367,6 +367,8 @@ public class UICustomSteps {
     }
 
     public void checkPayNowCheckout() throws Exception {
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        waitForElementToAppear(driver, "//div/span[text()='Pay now']/../following-sibling::div", 10);
         String getPayNowChekout = getElementByXpath(driver, "//div/span[text()='Pay now']/../following-sibling::div").getText();
         String eGetPayNowCheckout = getPayNowChekout.replaceAll("[^0-9]", "");
         int iGetPayNowCheckout = Integer.parseInt(eGetPayNowCheckout);

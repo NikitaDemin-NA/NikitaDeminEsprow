@@ -191,7 +191,7 @@ public class CustomSteps extends FinalAccount {
 
                 }
             }
-            Thread.sleep(2000);
+            Thread.sleep(7000);
         } catch (Exception e) {
             throw new Exception("error with add " + plus + " extra Sessions");
         }

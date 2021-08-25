@@ -65,17 +65,17 @@ formatter.scenario({
   ]
 });
 formatter.step({
-  "name": "open Subscription page",
-  "keyword": "And "
+  "name": "delete all Exchanges",
+  "keyword": "Then "
 });
 formatter.match({
-  "location": "steps.CustomSteps.openSubcirption()"
+  "location": "steps.CustomSteps.deleteAllEchanges()"
 });
 formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "add 3 new Exchange with \"FIX 4.2\" Protocol Type and 7 Number of Sessions",
+  "name": "add 1 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
   "keyword": "Then "
 });
 formatter.match({
@@ -95,7 +95,47 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "add 3 extra Sessions for all Exchanges",
+  "name": "pay for the Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.payForTheExchange()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "open Subscription page",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "steps.CustomSteps.openSubcirption()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "add 3 new Exchange with \"FIX 5.0\" Protocol Type and 4 Number of Sessions",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check Final Account",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.checkFinalAccount()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "add 2 extra Sessions for all Exchanges",
   "keyword": "Then "
 });
 formatter.match({
@@ -115,11 +155,11 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "wait 8 seconds",
-  "keyword": "When "
+  "name": "pay for the Exchanges",
+  "keyword": "Then "
 });
 formatter.match({
-  "location": "steps.CustomSteps.waitSecond(long)"
+  "location": "steps.CustomSteps.payForTheExchange()"
 });
 formatter.result({
   "status": "passed"
