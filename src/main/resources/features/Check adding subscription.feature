@@ -14,7 +14,7 @@
 
       #step1
       #add
-      Then add 2 new Exchange with "FIX 4.2" Protocol Type and 1 Number of Sessions
+      Then add 4 new Exchange with "FIX 4.2" Protocol Type and 1 Number of Sessions
       Then check Final Account
 
       #modify
