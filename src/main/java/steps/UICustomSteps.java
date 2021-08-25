@@ -25,6 +25,9 @@ public class UICustomSteps {
     int totalAddPriceSessionsMS = 1;
     int totalQuantityExchangePO = 0;
     int totalQuantitySessionsPO = 0;
+    int iGetCP;
+    int iGetMS;
+
 
 
     public void getPageInWindows() {
@@ -322,11 +325,32 @@ public class UICustomSteps {
             try {
                 WebElement clickOK = driver.findElement(By.xpath("//button[text()='Remove']"));
                 clickOK.click();
-                System.out.println("1");
             } catch (Exception e) {
             }
-
         }
+
+
+
+     public void checkPayNow() throws Exception {
+         String getPayNowOrder = getElementByXpath(driver, "//div/span[text()='Pay now']/../following-sibling::div").getText();
+         String eGetPayNowOrder = getPayNowOrder.replaceAll("[^0-9]", "");
+         int iGetPayNowOrder = Integer.parseInt(eGetPayNowOrder);
+
+         if(iGetPayNowOrder!=iGetCP){
+             throw new Exception("value of \"Pay Now\" button is not correct");
+         }
+     }
+
+    public void checkNextCharge() throws Exception {
+        String getNextChargeOrder = getElementByXpath(driver, "//div/span[contains(text(),'Next charge')]/../following-sibling::div").getText();
+        String eGetNextChargeOrder = getNextChargeOrder.replaceAll("[^0-9]", "");
+        int iGetNextChargeOrder = Integer.parseInt(eGetNextChargeOrder);
+
+        if(iGetNextChargeOrder!=iGetMS*10){
+            throw new Exception("value of \"Next Charge\" button is not correct");
+        }
+    }
+
 
 
 

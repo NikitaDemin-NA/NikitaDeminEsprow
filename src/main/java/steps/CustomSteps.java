@@ -137,6 +137,9 @@ public class CustomSteps extends FinalAccount {
         clickPayButton();
         checkValueOfExchangePO();
         checkValueOfSessionsPO();
+        checkPayNow();
+        checkNextCharge();
+
 
 
 

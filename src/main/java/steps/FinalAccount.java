@@ -126,7 +126,7 @@ public class FinalAccount extends UICustomSteps {
             int totalMSFromList = totalPriceMS + (totalPriceSessionsMS * totalAddPriceSessionsMS);
             String getMS = getElementByXpath(driver, "//div/span[text()='Monthly Subscription']/following-sibling::*").getText();
             String eGetMS = getMS.replaceAll("[^0-9]", "");
-            int iGetMS = Integer.parseInt(eGetMS);
+            iGetMS= Integer.parseInt(eGetMS);
 
             if (totalMSFromList != iGetMS) {
                 throw new Exception("Value of Mounthly Subscription is not correct");
@@ -152,7 +152,7 @@ public class FinalAccount extends UICustomSteps {
         try {
             String getCP = getElementByXpath(driver, "//div/span[text()='Current Payment']/following-sibling::*").getText();
             String eGetCP = getCP.replaceAll("[^0-9]", "");
-            int iGetCP = Integer.parseInt(eGetCP);
+            iGetCP = Integer.parseInt(eGetCP);
 
             if(totalPriceCP!=iGetCP){
                 throw new Exception("Value of Current Payment is not correct");
