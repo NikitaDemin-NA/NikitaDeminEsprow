@@ -16,14 +16,16 @@
 
 
       #add
-      Then add 1 new Exchange with "FIX 4.2" Protocol Type and 4 Number of Sessions
+      Then add 1 new Exchange with "FIX 4.2" Protocol Type and 1 Number of Sessions
       Then check Final Account
 
       #pay
       Then pay for the Exchanges
 
       #modify
-
+      And open Subscription page
+      Then add 2 new Exchange with "FIX 4.2" Protocol Type and 3 Number of Sessions
+      Then check Final Account
 
 
       When wait 4 seconds

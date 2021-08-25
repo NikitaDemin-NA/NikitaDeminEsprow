@@ -118,8 +118,13 @@ public class CustomSteps extends FinalAccount {
             List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//span[text()='[Exchange not created yet]']"));
             int quantityOfNewExchangesNew = checkNewExchanges.size();
 
+            //driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+            //take a quantity of PAID values Protocol Type in list of Subscription
+            List<WebElement> quantityOfPaidTypeFinalAccountMS = getElementsByXpath(driver, "//*[text()='Paid']");
+            quantityOfPaidTypeFinalAccountMSInt = quantityOfPaidTypeFinalAccountMS.size();
+
             quantityOfNewExchanges = 1;
-            if (quantityOfNewExchangesNew == quantityOfNewExchanges * quantityNewEchange) {
+            if (quantityOfNewExchangesNew-quantityOfPaidTypeFinalAccountMSInt == quantityOfNewExchanges * quantityNewEchange) {
                 quantityOfNewExchanges = 0;
             } else {
                 throw new Exception("New Exchange didn't create");
@@ -138,8 +143,8 @@ public class CustomSteps extends FinalAccount {
     @Given("pay for the Exchanges")
     public void payForTheExchange() throws Exception {
         clickPayButton();
-        checkValueOfExchangePO();
-        checkValueOfSessionsPO();
+        //checkValueOfExchangePO();
+        //checkValueOfSessionsPO();
         checkPayNowOrder();
         checkNextChargeOrder();
         clickCheckout();

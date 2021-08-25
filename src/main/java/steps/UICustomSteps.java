@@ -313,7 +313,7 @@ public class UICustomSteps {
             int iGetSessionsPriceOrder = Integer.parseInt(eGetSessionsPriceOrder);
             totalQuantitySessionsPO = iGetSessionsPriceOrder + totalQuantitySessionsPO;
         }
-        if ((totalPriceSessionsMS * totalAddPriceSessionsMS) != totalQuantitySessionsPO / 10) {
+        if ((totalPriceSessionsMS * totalAddPriceSessionsMS) != totalQuantitySessionsPO * 10) {
             throw new Exception("Prices of Exchange in \"Your Order\" is not correct");
         }
     }

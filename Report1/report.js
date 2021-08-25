@@ -75,7 +75,7 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "add 1 new Exchange with \"FIX 4.2\" Protocol Type and 4 Number of Sessions",
+  "name": "add 1 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
   "keyword": "Then "
 });
 formatter.match({
@@ -100,6 +100,36 @@ formatter.step({
 });
 formatter.match({
   "location": "steps.CustomSteps.payForTheExchange()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "open Subscription page",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "steps.CustomSteps.openSubcirption()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "add 2 new Exchange with \"FIX 4.2\" Protocol Type and 3 Number of Sessions",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check Final Account",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.checkFinalAccount()"
 });
 formatter.result({
   "status": "passed"
