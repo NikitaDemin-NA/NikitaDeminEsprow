@@ -8,7 +8,7 @@ import io.cucumber.junit.Cucumber;
         plugin = {"pretty", "html:Report1", "json:target/cucumber.json"},
         features = "src/main/resources/features",
         glue = "steps",
-        tags = "@Add"
+        tags = "@Test"
 )
 public class RunnerTest {
 }

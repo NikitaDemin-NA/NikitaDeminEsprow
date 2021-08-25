@@ -54,12 +54,12 @@ public class CustomSteps extends FinalAccount {
         setPassword(passwordField);
         authorizationButton();
         checkSessionsExpired();
-
+        openSubcirption();
     }
 
 
-    @Given("open Subscription page")
-    public void openSubcirption() throws Exception {
+   // @Given("open Subscription page")
+    /*public void openSubcirption() throws Exception {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         waitForElementToAppear(driver, "//span[text()='test']", 5);
         WebElement testButton = driver.findElement(By.xpath("//span[text()='test']"));
@@ -75,7 +75,7 @@ public class CustomSteps extends FinalAccount {
 
         checkQuantityOfExchanges();
 
-    }
+    }*/
 
 
     @Given("add {int} new Exchange with {string} Protocol Type and {int} Number of Sessions")
@@ -143,6 +143,7 @@ public class CustomSteps extends FinalAccount {
 
     @Given("pay for the Exchanges")
     public void payForTheExchange() throws Exception {
+        checkQuantityOfExchanges();
         clickPayButton();
         //checkValueOfExchangePO();
         //checkValueOfSessionsPO();

@@ -415,6 +415,14 @@ public class UICustomSteps {
     public void checkSuccessOfPay() throws Exception {
         if(!getSuccessPayText()) {
             throw new Exception("trouble with payment process");
+        } else {
+            openSubcirption();
+            List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//span[text()='[Exchange not created yet]']"));
+            int quantityOfNewExchangesNew = checkNewExchanges.size();
+
+            if(quantityOfNewExchanges != quantityOfNewExchangesNew){
+                throw new Exception();
+            }
         }
     }
 
@@ -450,6 +458,24 @@ public class UICustomSteps {
             quantityOfNewExchanges = checkNewExchanges.size();
             quantityOfNewExchanges--;
         }
+    }
+
+    public void openSubcirption() throws Exception {
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        waitForElementToAppear(driver, "//span[text()='test']", 5);
+        WebElement testButton = driver.findElement(By.xpath("//span[text()='test']"));
+        testButton.click();
+        WebElement subscriptionButton = driver.findElement(By.xpath("//a[text()='Subscription']"));
+        subscriptionButton.click();
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+        waitforPageLoad(driver);
+        if (getElementByXpath(driver, "//h1[text()='Subscription']") == null) {
+            throw new Exception("Subscription doesn't open");
+        }
+
+        checkQuantityOfExchanges();
+
     }
 
 

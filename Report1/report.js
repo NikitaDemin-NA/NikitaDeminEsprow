@@ -1,14 +1,11 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/main/resources/features/Add%20exchange.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/main/resources/features/E2E%20check%20Subscription.feature");
 formatter.feature({
   "name": "E2E check Subscription of ETP Markets",
   "description": "",
   "keyword": "Feature",
   "tags": [
     {
-      "name": "@Test2"
-    },
-    {
-      "name": "@Add"
+      "name": "@Test"
     }
   ]
 });
@@ -47,26 +44,13 @@ formatter.match({
 formatter.result({
   "status": "passed"
 });
-formatter.step({
-  "name": "open Subscription page",
-  "keyword": "And "
-});
-formatter.match({
-  "location": "steps.CustomSteps.openSubcirption()"
-});
-formatter.result({
-  "status": "passed"
-});
 formatter.scenario({
-  "name": "Add Exchange subscription",
+  "name": "Delete, add, pay, modify Exchange subscription",
   "description": "",
   "keyword": "Scenario",
   "tags": [
     {
-      "name": "@Test2"
-    },
-    {
-      "name": "@Add"
+      "name": "@Test"
     }
   ]
 });
@@ -101,11 +85,11 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "add 2 new Exchange with \"FIX 4.4\" Protocol Type and 2 Number of Sessions",
+  "name": "add 2 extra Sessions for all Exchanges",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
+  "location": "steps.CustomSteps.addExtraSessions(int)"
 });
 formatter.result({
   "status": "passed"
@@ -131,31 +115,11 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "open Subscription page",
-  "keyword": "And "
+  "name": "close browser",
+  "keyword": "When "
 });
 formatter.match({
-  "location": "steps.CustomSteps.openSubcirption()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "add 3 new Exchange with \"FIX 5.0\" Protocol Type and 3 Number of Sessions",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "check Final Account",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.checkFinalAccount()"
+  "location": "steps.CustomSteps.tearDown()"
 });
 formatter.result({
   "status": "passed"

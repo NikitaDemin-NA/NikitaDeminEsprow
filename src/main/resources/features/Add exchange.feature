@@ -2,7 +2,7 @@
 #encoding: utf-8
 
 @Test2 @Add
-Feature: E2E check Subscription of ETP Markets
+Feature: Check adding Exchange subscription of ETP Markets
 
   Background:
     When open page
@@ -21,6 +21,7 @@ Feature: E2E check Subscription of ETP Markets
     Then add 2 new Exchange with "FIX 4.4" Protocol Type and 2 Number of Sessions
     Then check Final Account
 
+    #pay
     Then pay for the Exchanges
 
     And open Subscription page
