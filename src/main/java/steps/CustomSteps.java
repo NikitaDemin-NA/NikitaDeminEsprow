@@ -53,21 +53,18 @@ public class CustomSteps extends FinalAccount {
         setEmail(emailField);
         setPassword(passwordField);
         authorizationButton();
+        checkSessionsExpired();
+
     }
 
 
     @Given("open Subscription page")
     public void openSubcirption() throws Exception {
-        driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
-        checkSessionsExpired();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-        String url = driver.getCurrentUrl();
-        if(!url.equals("https://spa-dev.etpmarkets.com:3000/app/subscription")) {
-            WebElement subscriptionButton = driver.findElement(By.xpath("//a[text()='Subscription']"));
+        WebElement testButton = driver.findElement(By.xpath("//span[text()='test']"));
+        testButton.click();
+        WebElement subscriptionButton = driver.findElement(By.xpath("//a[text()='Subscription']"));
             subscriptionButton.click();
-
-        }
             //Thread.sleep(2000);
 
         waitforPageLoad(driver);

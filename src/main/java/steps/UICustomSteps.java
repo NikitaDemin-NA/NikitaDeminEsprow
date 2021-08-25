@@ -317,17 +317,17 @@ public class UICustomSteps {
     }
 
     public void checkSessionsExpired() throws InterruptedException {
-        for (int i = 0; i < 10; i++) {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //for (int i = 0; i < 10; i++) {
             try {
                 WebElement clickOK = driver.findElement(By.xpath("//button[text()='Remove']"));
                 clickOK.click();
                 System.out.println("1");
             } catch (Exception e) {
-                Thread.sleep(100);
             }
 
         }
-    }
+
 
 
 
