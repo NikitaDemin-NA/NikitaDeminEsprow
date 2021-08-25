@@ -386,7 +386,7 @@ public class UICustomSteps {
     }
 
     public void clickAgree() throws Exception {
-        if(checkClickableAgreeButton() == false) {
+        if(!checkClickableAgreeButton()) {
             WebElement clickAgreeButton = driver.findElement(By.xpath("//input[@type='checkbox']"));
             clickAgreeButton.click();
             checkClickableAgreeButton();
@@ -407,7 +407,7 @@ public class UICustomSteps {
     }
 
     public void checkSuccessOfPay() throws Exception {
-        if(getSuccessPayText() == false) {
+        if(!getSuccessPayText()) {
             throw new Exception("trouble with payment process");
         }
     }
@@ -423,6 +423,17 @@ public class UICustomSteps {
             return false;
         }
     }
+
+    public boolean getTrueExchanges() throws InterruptedException {
+        List<WebElement> findAllTrueExchanges = getElementsByXpath(driver, "//input [@type='checkbox' and @value='true']");
+        int iFindAllTrueExchanges = findAllTrueExchanges.size();
+        if(iFindAllTrueExchanges==quantityOfNewExchanges+1){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
 

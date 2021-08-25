@@ -11,13 +11,19 @@
       And open Subscription page
 
     Scenario: add Exchange subscription
+      #delete(due to defect)
+      Then delete all Exchanges
 
-      #step1 add
+
+      #add
       Then add 1 new Exchange with "FIX 4.2" Protocol Type and 1 Number of Sessions
       Then check Final Account
 
-      #modify
+      #pay
       Then pay for the Exchanges
+
+      #modify
+
 
 
       When wait 4 seconds

@@ -23,9 +23,11 @@ public class FinalAccount extends UICustomSteps {
     //check a quantity of values Protocol Type
     public void checkQuantityPT() throws Exception {
         try {
+            driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
             //take a quantity of PAID values Protocol Type in list of Subscription
             List<WebElement> quantityOfPaidTypeFinalAccountMS = getElementsByXpath(driver, "//span[text()='Paid']");
             quantityOfPaidTypeFinalAccountMSInt = quantityOfPaidTypeFinalAccountMS.size();
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
             //take a quantity of values Protocol Type in list of Subscription
             List<WebElement> quantityOfTypeSubscription = getElementsByXpath(driver, "//input [@type='checkbox' and @value='false']");

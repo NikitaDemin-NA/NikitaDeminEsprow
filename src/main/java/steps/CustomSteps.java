@@ -93,7 +93,7 @@ public class CustomSteps extends FinalAccount {
             clickAddExchange();
             checkQuantityProtocolType(6);
 
-            WebElement clickProtocolType = driver.findElement(By.xpath("//div/div[text()='"+protocolType+"']"));
+            WebElement clickProtocolType = driver.findElement(By.xpath("//div/div[text()='" + protocolType + "']"));
             clickProtocolType.click();
 
             //steps before adding Number of Sessions
@@ -114,13 +114,16 @@ public class CustomSteps extends FinalAccount {
 
         //check new Exchange
         String url = driver.getCurrentUrl();
-        if(url.equals("https://spa-dev.etpmarkets.com:3000/app/subscription")) {
+        if (url.equals("https://spa-dev.etpmarkets.com:3000/app/subscription")) {
             List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//span[text()='[Exchange not created yet]']"));
             int quantityOfNewExchangesNew = checkNewExchanges.size();
 
-            if (quantityOfNewExchangesNew != quantityOfNewExchanges+quantityNewEchange) {
+            quantityOfNewExchanges = 1;
+            if (quantityOfNewExchangesNew == quantityOfNewExchanges * quantityNewEchange) {
+                quantityOfNewExchanges = 0;
+            } else {
                 throw new Exception("New Exchange didn't create");
-            }
+                }
         }
     }
 
@@ -144,12 +147,32 @@ public class CustomSteps extends FinalAccount {
         checkNextChargeCheckout();
         clickAgree();
         checkSuccessOfPay();
+    }
 
+    @Given("delete all Exchanges")
+    public void deleteAllEchanges() throws Exception {
+        if(quantityOfNewExchanges!=0){
+            WebElement checkboxDeleteAllExchanges = driver.findElement(By.xpath("(//input [@type='checkbox' and @value='false'])[1]/../parent::div"));
+            checkboxDeleteAllExchanges.click();
 
+            if(getTrueExchanges()){
+                WebElement deleteAllExchanges = driver.findElement(By.xpath("//*[name()='svg' and @data-tip='Delete selected subscriptions']"));
+                deleteAllExchanges.click();
 
+                //checkFinalAccount
+                if(iGetMS!=0 && iGetCP!=0){
+                    throw new Exception("values of Final Account is not \"$0\"");
+                }
 
-
-
+                WebElement clickConfirmButton = driver.findElement(By.xpath("//button[text()='Confirm']"));
+                clickConfirmButton.click();
+                WebElement clickConfirmButtonAttention = driver.findElement(By.xpath("(//div[contains(text(),'ATT')]/../div)[3]/button[text()='Confirm']"));
+                clickConfirmButtonAttention.click();
+                waitForElementToAppear(driver, "//div[contains(text(),'You don')]", 3);
+            } else {
+                throw new Exception("trouble with \"Delete all Exchanges \" button");
+            }
+        }
     }
 
 

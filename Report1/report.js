@@ -65,6 +65,16 @@ formatter.scenario({
   ]
 });
 formatter.step({
+  "name": "delete all Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.deleteAllEchanges()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
   "name": "add 1 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
   "keyword": "Then "
 });
