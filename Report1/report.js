@@ -65,7 +65,7 @@ formatter.scenario({
   ]
 });
 formatter.step({
-  "name": "add 3 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
+  "name": "add 1 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
   "keyword": "Then "
 });
 formatter.match({
@@ -95,9 +95,23 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "wait 40 seconds",
+  "name": "wait 4 seconds",
   "keyword": "When "
 });
 formatter.match({
   "location": "steps.CustomSteps.waitSecond(long)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "close browser",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "steps.CustomSteps.tearDown()"
+});
+formatter.result({
+  "status": "passed"
+});
 });

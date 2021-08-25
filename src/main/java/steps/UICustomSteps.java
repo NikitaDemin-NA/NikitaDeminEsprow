@@ -271,7 +271,6 @@ public class UICustomSteps {
 
     //click payButton
     public void clickPayButton() throws Exception {
-        if (quantityOfNewExchanges != 0) {
             WebElement payButton = driver.findElement(By.xpath("//button[contains(text(),'Pay')]"));
             payButton.click();
 
@@ -284,7 +283,7 @@ public class UICustomSteps {
             } catch (Exception e) {
                 Thread.sleep(1000);
             }
-        }
+
     }
 
     //find Quantity of Exchange Price Order
@@ -364,27 +363,67 @@ public class UICustomSteps {
         } catch (Exception e) {
             Thread.sleep(1000);
         }
+    }
 
-        public void checkPayNowCheckout() throws Exception {
-            String getPayNowChekout = getElementByXpath(driver, "//div/span[text()='Pay now']/../following-sibling::div").getText();
-            String eGetPayNowCheckout = getPayNowChekout.replaceAll("[^0-9]", "");
-            int iGetPayNowCheckout = Integer.parseInt(eGetPayNowCheckout);
+    public void checkPayNowCheckout() throws Exception {
+        String getPayNowChekout = getElementByXpath(driver, "//div/span[text()='Pay now']/../following-sibling::div").getText();
+        String eGetPayNowCheckout = getPayNowChekout.replaceAll("[^0-9]", "");
+        int iGetPayNowCheckout = Integer.parseInt(eGetPayNowCheckout);
 
-            if(iGetPayNowCheckout!=iGetCP){
-                throw new Exception("value of \"Pay Now\" button is not correct");
-            }
-        }
-
-        public void checkNextChargeCheckout() throws Exception {
-            String getNextChargeCheckout = getElementByXpath(driver, "//div/span[contains(text(),'Next charge')]/../following-sibling::div").getText();
-            String eGetNextChargeCheckout = getNextChargeCheckout.replaceAll("[^0-9]", "");
-            int iGetNextChargeCheckout = Integer.parseInt(eGetNextChargeCheckout);
-
-            if(iGetNextChargeCheckout!=iGetMS*10){
-                throw new Exception("value of \"Next Charge\" button is not correct");
-            }
+        if(iGetPayNowCheckout!=iGetCP){
+            throw new Exception("value of \"Pay Now\" button is not correct");
         }
     }
+
+    public void checkNextChargeCheckout() throws Exception {
+        String getNextChargeCheckout = getElementByXpath(driver, "//div/span[contains(text(),'Next charge')]/../following-sibling::div").getText();
+        String eGetNextChargeCheckout = getNextChargeCheckout.replaceAll("[^0-9]", "");
+        int iGetNextChargeCheckout = Integer.parseInt(eGetNextChargeCheckout);
+
+        if(iGetNextChargeCheckout!=iGetMS*10){
+            throw new Exception("value of \"Next Charge\" button is not correct");
+        }
+    }
+
+    public void clickAgree() throws Exception {
+        if(checkClickableAgreeButton() == false) {
+            WebElement clickAgreeButton = driver.findElement(By.xpath("//input[@type='checkbox']"));
+            clickAgreeButton.click();
+            checkClickableAgreeButton();
+        } else {
+            throw new Exception("trouble with Checkout button");
+        }
+    }
+
+    public boolean checkClickableAgreeButton() {
+        try {
+                WebDriverWait wait = new WebDriverWait(driver, 2);
+                WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Pay $')]/parent::button")));
+                element.click();
+                return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void checkSuccessOfPay() throws Exception {
+        if(getSuccessPayText() == false) {
+            throw new Exception("trouble with payment process");
+        }
+    }
+
+    public boolean getSuccessPayText(){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, 5);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='Successful Subscription']")));
+            WebElement clickSuccessButton = driver.findElement(By.xpath("//a[@href='/app/exchanges' and text()='Go to exchanges']"));
+            clickSuccessButton.click();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
 
 

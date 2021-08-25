@@ -142,6 +142,8 @@ public class CustomSteps extends FinalAccount {
         clickCheckout();
         checkPayNowCheckout();
         checkNextChargeCheckout();
+        clickAgree();
+        checkSuccessOfPay();
 
 
 

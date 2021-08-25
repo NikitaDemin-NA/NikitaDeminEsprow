@@ -160,9 +160,9 @@ public class FinalAccount extends UICustomSteps {
         }catch (Exception e){
             throw new Exception("Value of Current Payment is not correct / or Element \"Current Payment\" is not visible");
         }
-
-
     }
+
+
 
 
 }

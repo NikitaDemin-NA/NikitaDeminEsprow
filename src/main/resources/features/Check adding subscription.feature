@@ -12,16 +12,15 @@
 
     Scenario: add Exchange subscription
 
-      #step1
-      #add
-      Then add 3 new Exchange with "FIX 4.2" Protocol Type and 1 Number of Sessions
+      #step1 add
+      Then add 1 new Exchange with "FIX 4.2" Protocol Type and 1 Number of Sessions
       Then check Final Account
 
       #modify
       Then pay for the Exchanges
 
 
-      When wait 40 seconds
+      When wait 4 seconds
       When close browser
 
 
