@@ -60,9 +60,9 @@ public class UICustomSteps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors", "--disable-extensions", "--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
         driver.get("https://spa-dev.etpmarkets.com:3000/");
     }
 
@@ -319,10 +319,9 @@ public class UICustomSteps {
         }
     }
 
-    public void checkSessionsExpired() throws InterruptedException {
+    public void checkSessionsExpired() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        //for (int i = 0; i < 10; i++) {
-            try {
+         try {
                 WebElement clickOK = driver.findElement(By.xpath("//button[text()='Remove']"));
                 clickOK.click();
             } catch (Exception e) {
@@ -332,9 +331,12 @@ public class UICustomSteps {
 
 
      public void checkPayNowOrder() throws Exception {
+         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+         waitForElementToAppear(driver, "//div/span[text()='Pay now']/../following-sibling::div", 10);
          String getPayNowOrder = getElementByXpath(driver, "//div/span[text()='Pay now']/../following-sibling::div").getText();
          String eGetPayNowOrder = getPayNowOrder.replaceAll("[^0-9]", "");
          int iGetPayNowOrder = Integer.parseInt(eGetPayNowOrder);
+         driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
 
          if(iGetPayNowOrder!=iGetCP){
              throw new Exception("value of \"Pay Now\" button is not correct");
@@ -367,11 +369,12 @@ public class UICustomSteps {
     }
 
     public void checkPayNowCheckout() throws Exception {
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
         waitForElementToAppear(driver, "//div/span[text()='Pay now']/../following-sibling::div", 10);
         String getPayNowChekout = getElementByXpath(driver, "//div/span[text()='Pay now']/../following-sibling::div").getText();
         String eGetPayNowCheckout = getPayNowChekout.replaceAll("[^0-9]", "");
         int iGetPayNowCheckout = Integer.parseInt(eGetPayNowCheckout);
+        driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
 
         if(iGetPayNowCheckout!=iGetCP){
             throw new Exception("value of \"Pay Now\" button is not correct");
@@ -437,14 +440,17 @@ public class UICustomSteps {
         }
     }
 
-
-
-
-
-
-
-
-
+    public void checkQuantityOfExchanges() {
+        try {
+            waitForElementToAppear(driver, "//div[contains(text(),'You don')]", 3);
+            quantityOfNewExchanges = 0;
+        } catch (Exception e) {
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//input[@type='checkbox']"));
+            quantityOfNewExchanges = checkNewExchanges.size();
+            quantityOfNewExchanges--;
+        }
+    }
 
 
 

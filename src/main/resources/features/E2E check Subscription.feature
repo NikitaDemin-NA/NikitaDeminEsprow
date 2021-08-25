@@ -2,7 +2,7 @@
 #encoding: utf-8
 
 @Test
-  Feature: Check Subscription of ETP Markets
+  Feature: E2E check Subscription of ETP Markets
 
     Background:
       When open page
@@ -10,7 +10,7 @@
       Given sign in with login = "test.qa.3@esprow.com" and password = "temporaryAccount"
       And open Subscription page
 
-    Scenario: add Exchange subscription
+    Scenario: Delete, add, pay, modify Exchange subscription
       #delete
       Then delete all Exchanges
 

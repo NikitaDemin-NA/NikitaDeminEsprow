@@ -1,11 +1,14 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/main/resources/features/Check%20adding%20subscription.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/main/resources/features/Add%20exchange.feature");
 formatter.feature({
-  "name": "Check Subscription of ETP Markets",
+  "name": "E2E check Subscription of ETP Markets",
   "description": "",
   "keyword": "Feature",
   "tags": [
     {
-      "name": "@Test"
+      "name": "@Test2"
+    },
+    {
+      "name": "@Add"
     }
   ]
 });
@@ -55,12 +58,15 @@ formatter.result({
   "status": "passed"
 });
 formatter.scenario({
-  "name": "add Exchange subscription",
+  "name": "Add Exchange subscription",
   "description": "",
   "keyword": "Scenario",
   "tags": [
     {
-      "name": "@Test"
+      "name": "@Test2"
+    },
+    {
+      "name": "@Add"
     }
   ]
 });
@@ -76,6 +82,26 @@ formatter.result({
 });
 formatter.step({
   "name": "add 1 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check Final Account",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.checkFinalAccount()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "add 2 new Exchange with \"FIX 4.4\" Protocol Type and 2 Number of Sessions",
   "keyword": "Then "
 });
 formatter.match({
@@ -115,7 +141,7 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "add 3 new Exchange with \"FIX 5.0\" Protocol Type and 4 Number of Sessions",
+  "name": "add 3 new Exchange with \"FIX 5.0\" Protocol Type and 3 Number of Sessions",
   "keyword": "Then "
 });
 formatter.match({
@@ -130,46 +156,6 @@ formatter.step({
 });
 formatter.match({
   "location": "steps.CustomSteps.checkFinalAccount()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "add 2 extra Sessions for all Exchanges",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.addExtraSessions(int)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "check Final Account",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.checkFinalAccount()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "pay for the Exchanges",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.payForTheExchange()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "close browser",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "steps.CustomSteps.tearDown()"
 });
 formatter.result({
   "status": "passed"

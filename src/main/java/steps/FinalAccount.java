@@ -120,8 +120,8 @@ public class FinalAccount extends UICustomSteps {
             try{
                 //get values Additional Price Sessions in list of Subscription
                 for (int p = 1; p <=1 ; p++) {
-                    driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                    waitForElementToAppear(driver, "((//div/p[text()='Price: $'])["+i+"]/following-sibling::div[2]/div[2])/span", 1);
+                    //driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                    //waitForElementToAppear(driver, "((//div/p[text()='Price: $'])["+i+"]/following-sibling::div[2]/div[2])/span", 1);
 
 
                     String addPriceSessionsListSubscription = getElementByXpath(driver, "((//div/p[text()='Price: $'])["+i+"]/following-sibling::div[2]/div[2])/span").getText();
