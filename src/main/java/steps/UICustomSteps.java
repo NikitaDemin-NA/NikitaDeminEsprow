@@ -331,7 +331,7 @@ public class UICustomSteps {
 
 
 
-     public void checkPayNow() throws Exception {
+     public void checkPayNowOrder() throws Exception {
          String getPayNowOrder = getElementByXpath(driver, "//div/span[text()='Pay now']/../following-sibling::div").getText();
          String eGetPayNowOrder = getPayNowOrder.replaceAll("[^0-9]", "");
          int iGetPayNowOrder = Integer.parseInt(eGetPayNowOrder);
@@ -341,13 +341,48 @@ public class UICustomSteps {
          }
      }
 
-    public void checkNextCharge() throws Exception {
+    public void checkNextChargeOrder() throws Exception {
         String getNextChargeOrder = getElementByXpath(driver, "//div/span[contains(text(),'Next charge')]/../following-sibling::div").getText();
         String eGetNextChargeOrder = getNextChargeOrder.replaceAll("[^0-9]", "");
         int iGetNextChargeOrder = Integer.parseInt(eGetNextChargeOrder);
 
         if(iGetNextChargeOrder!=iGetMS*10){
             throw new Exception("value of \"Next Charge\" button is not correct");
+        }
+    }
+
+    public void clickCheckout() throws Exception {
+        WebElement clickCheckoutButton = driver.findElement(By.xpath("//span[contains(text(),'Checkout')]"));
+        clickCheckoutButton.click();
+
+        try {
+            for (int i = 0; i < 20; i++) {
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                waitForElementToAppear(driver, "//h1[contains(text(),'Complete your order')]", 20);
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            }
+        } catch (Exception e) {
+            Thread.sleep(1000);
+        }
+
+        public void checkPayNowCheckout() throws Exception {
+            String getPayNowChekout = getElementByXpath(driver, "//div/span[text()='Pay now']/../following-sibling::div").getText();
+            String eGetPayNowCheckout = getPayNowChekout.replaceAll("[^0-9]", "");
+            int iGetPayNowCheckout = Integer.parseInt(eGetPayNowCheckout);
+
+            if(iGetPayNowCheckout!=iGetCP){
+                throw new Exception("value of \"Pay Now\" button is not correct");
+            }
+        }
+
+        public void checkNextChargeCheckout() throws Exception {
+            String getNextChargeCheckout = getElementByXpath(driver, "//div/span[contains(text(),'Next charge')]/../following-sibling::div").getText();
+            String eGetNextChargeCheckout = getNextChargeCheckout.replaceAll("[^0-9]", "");
+            int iGetNextChargeCheckout = Integer.parseInt(eGetNextChargeCheckout);
+
+            if(iGetNextChargeCheckout!=iGetMS*10){
+                throw new Exception("value of \"Next Charge\" button is not correct");
+            }
         }
     }
 

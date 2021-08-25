@@ -95,23 +95,9 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "wait 4 seconds",
+  "name": "wait 40 seconds",
   "keyword": "When "
 });
 formatter.match({
   "location": "steps.CustomSteps.waitSecond(long)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "close browser",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "steps.CustomSteps.tearDown()"
-});
-formatter.result({
-  "status": "passed"
-});
 });

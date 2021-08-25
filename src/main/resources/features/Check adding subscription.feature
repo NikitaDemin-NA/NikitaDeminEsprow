@@ -21,7 +21,7 @@
       Then pay for the Exchanges
 
 
-      When wait 4 seconds
+      When wait 40 seconds
       When close browser
 
 
