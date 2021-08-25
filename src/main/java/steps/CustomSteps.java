@@ -129,6 +129,16 @@ public class CustomSteps extends FinalAccount {
         checkCurrentPaymentFinalAccount();
     }
 
+    @Given("pay for the Exchanges")
+    public void payForTheExchange() throws Exception {
+        clickPayButton();
+        checkValueOfExchangePO();
+        checkValueOfSessionsPO();
+
+
+
+    }
+
 
     @Given("wait {long} seconds")
     public void waitSecond(long seconds) throws InterruptedException {

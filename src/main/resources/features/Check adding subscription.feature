@@ -17,7 +17,8 @@
       Then add 2 new Exchange with "FIX 4.2" Protocol Type and 1 Number of Sessions
       Then check Final Account
 
-      #
+      #modify
+      Then pay for the Exchanges
 
 
       When wait 4 seconds

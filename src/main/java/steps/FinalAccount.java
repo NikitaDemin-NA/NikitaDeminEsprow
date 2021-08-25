@@ -96,9 +96,6 @@ public class FinalAccount extends UICustomSteps {
 
     //check Mounthly Subscription
     public void checkMounthlySubcriptionFinalAccount() throws Exception {
-        int totalPriceMS = 0;
-        int totalPriceSessionsMS = 0;
-        int totalAddPriceSessionsMS = 0;
         for (int i = 1; i <= quantityOfTypeSubscriptionInt; i++) {
             //get values Price in list of Subscription
             String priceListSubscription = getElementByXpath(driver, "(((//input [@type='checkbox' and @value='false']/../../..)/following-sibling::div[2]/div/p[contains(text(),'FIX')])/../following-sibling::div[2]/p[contains(text(),'$')])["+i+"]").getText();
@@ -118,6 +115,7 @@ public class FinalAccount extends UICustomSteps {
                 waitForElementToAppear(driver, "((//div/p[text()='Price: $'])[1]/following-sibling::div[2]/div[2]/p[contains(text(),'+')])["+i+"]", 1);
                 String addPriceSessionsListSubscription = getElementByXpath(driver, "((//div/p[text()='Price: $'])[1]/following-sibling::div[2]/div[2]/p[contains(text(),'+')])["+i+"]").getText();
                 String eAddPriceSessionsListSubscription = addPriceSessionsListSubscription.replaceAll("[^0-9]", "");
+                totalAddPriceSessionsMS=0;
                 int iAddPriceSessionsListSubscription = Integer.parseInt(eAddPriceSessionsListSubscription);
                 totalAddPriceSessionsMS = iAddPriceSessionsListSubscription+totalAddPriceSessionsMS;
             } catch (Exception e){driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);}
@@ -125,7 +123,7 @@ public class FinalAccount extends UICustomSteps {
 
 
         try {
-            int totalMSFromList = totalPriceMS + totalPriceSessionsMS + totalAddPriceSessionsMS;
+            int totalMSFromList = totalPriceMS + (totalPriceSessionsMS * totalAddPriceSessionsMS);
             String getMS = getElementByXpath(driver, "//div/span[text()='Monthly Subscription']/following-sibling::*").getText();
             String eGetMS = getMS.replaceAll("[^0-9]", "");
             int iGetMS = Integer.parseInt(eGetMS);

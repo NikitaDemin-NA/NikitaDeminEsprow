@@ -85,6 +85,16 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
+  "name": "pay for the Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.payForTheExchange()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
   "name": "wait 4 seconds",
   "keyword": "When "
 });

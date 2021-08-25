@@ -20,6 +20,11 @@ public class UICustomSteps {
     int quantityOfTypeSubscriptionInt;
     int quantityOfTypeFinalAccountCPInt;
     int quantityOfPaidTypeFinalAccountMSInt;
+    int totalPriceMS = 0;
+    int totalPriceSessionsMS = 0;
+    int totalAddPriceSessionsMS = 1;
+    int totalQuantityExchangePO = 0;
+    int totalQuantitySessionsPO = 0;
 
 
     public void getPageInWindows() {
@@ -257,8 +262,65 @@ public class UICustomSteps {
     //Explicit Wait
     public static void waitForElementToAppear(WebDriver driver, String selector, long timeOutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
-        WebElement a = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(selector)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(selector)));
     }
+
+
+    //click payButton
+    public void clickPayButton() throws Exception {
+        if (quantityOfNewExchanges != 0) {
+            WebElement payButton = driver.findElement(By.xpath("//button[contains(text(),'Pay')]"));
+            payButton.click();
+
+            try {
+                for (int i = 0; i < 20; i++) {
+                    driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                    waitForElementToAppear(driver, "//h1[contains(text(),'Your order')]", 20);
+                    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                }
+            } catch (Exception e) {
+                Thread.sleep(1000);
+            }
+        }
+    }
+
+    //find Quantity of Exchange Price Order
+    public void checkValueOfExchangePO() throws Exception {
+        List<WebElement> findQuantityExchangePriceOrder = getElementsByXpath(driver, "//h2[contains(text(),'Exchange')]/../h2/span[contains(text(),'$')]");
+        int iFindquantityExchangePriceOrder = findQuantityExchangePriceOrder.size();
+
+        for (int i = 1; i <= iFindquantityExchangePriceOrder; i++) {
+            String getEchangePriceOrder = getElementByXpath(driver, "(//h2[contains(text(),'Exchange')]/../h2/span[contains(text(),'$')])[" + i + "]").getText();
+            String eGetEchangePriceOrder = getEchangePriceOrder.replaceAll("[^0-9]", "");
+            int iGetEchangePriceOrder = Integer.parseInt(eGetEchangePriceOrder);
+            totalQuantityExchangePO = iGetEchangePriceOrder + totalQuantityExchangePO;
+        }
+        if (totalPriceMS != totalQuantityExchangePO / 10) {
+            throw new Exception("Prices of Exchange in \"Your Order\" is not correct");
+        }
+    }
+
+    //find Quantity of Sessions Price Order
+    public void checkValueOfSessionsPO() throws Exception {
+        List<WebElement> findQuantitySessionsPriceOrder = getElementsByXpath(driver, "//h2[contains(text(),'Session')]/../h2/span[contains(text(),'$')]");
+        int iFindquantitySessionsPriceOrder = findQuantitySessionsPriceOrder.size();
+
+        for (int i = 1; i <= iFindquantitySessionsPriceOrder; i++) {
+            String getSessionsPriceOrder = getElementByXpath(driver, "(//h2[contains(text(),'Session')]/../h2/span[contains(text(),'$')])[" + i + "]").getText();
+            String eGetSessionsPriceOrder = getSessionsPriceOrder.replaceAll("[^0-9]", "");
+            int iGetSessionsPriceOrder = Integer.parseInt(eGetSessionsPriceOrder);
+            totalQuantitySessionsPO = iGetSessionsPriceOrder + totalQuantitySessionsPO;
+        }
+        if ((totalPriceSessionsMS * totalAddPriceSessionsMS) != totalQuantitySessionsPO / 10) {
+            throw new Exception("Prices of Exchange in \"Your Order\" is not correct");
+        }
+    }
+
+
+
+
+
+
 
 
 }
