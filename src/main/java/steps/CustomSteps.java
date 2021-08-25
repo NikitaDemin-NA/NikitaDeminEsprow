@@ -58,18 +58,22 @@ public class CustomSteps extends FinalAccount {
 
     @Given("open Subscription page")
     public void openSubcirption() throws Exception {
+        checkSessionsExpired();
+
         String url = driver.getCurrentUrl();
         if(!url.equals("https://spa-dev.etpmarkets.com:3000/app/subscription")) {
             WebElement subscriptionButton = driver.findElement(By.xpath("//a[text()='Subscription']"));
             subscriptionButton.click();
-            waitforPageLoad(driver);
+
+        }
             //Thread.sleep(2000);
+
+        waitforPageLoad(driver);
             if (getElementByXpath(driver, "//h1[text()='Subscription']") == null) {
                 throw new Exception("Subscription doesn't open");
             }
 
             try{
-                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
                 waitForElementToAppear(driver, "//div[contains(text(),'You don')]", 3);
                 quantityOfNewExchanges=0;
             } catch (Exception e){
@@ -79,7 +83,7 @@ public class CustomSteps extends FinalAccount {
                 quantityOfNewExchanges--;
             }
 
-        }
+
     }
 
 
