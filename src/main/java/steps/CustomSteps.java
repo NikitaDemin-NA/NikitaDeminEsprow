@@ -57,24 +57,6 @@ public class CustomSteps extends FinalAccount {
     }
 
 
-   // @Given("open Subscription page")
-    /*public void openSubcirption() throws Exception {
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        waitForElementToAppear(driver, "//span[text()='test']", 5);
-        WebElement testButton = driver.findElement(By.xpath("//span[text()='test']"));
-        testButton.click();
-        WebElement subscriptionButton = driver.findElement(By.xpath("//a[text()='Subscription']"));
-        subscriptionButton.click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
-        waitforPageLoad(driver);
-            if (getElementByXpath(driver, "//h1[text()='Subscription']") == null) {
-                throw new Exception("Subscription doesn't open");
-            }
-
-        checkQuantityOfExchanges();
-
-    }*/
 
 
     @Given("add {int} new Exchange with {string} Protocol Type and {int} Number of Sessions")
@@ -133,7 +115,7 @@ public class CustomSteps extends FinalAccount {
 
     @Given("check Final Account")
     public void checkFinalAccount() throws Exception {
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         checkProtocolTypeFinalAccount();
         checkMounthlySubcriptionFinalAccount();
         checkCurrentPaymentFinalAccount();
