@@ -2,14 +2,14 @@
 #encoding: utf-8
 
 @PayVerificationErrorCard @all
-Feature: Check payment Exchange subscription of ETP Markets
+Feature: Check payment verification error Exchange subscription of ETP Markets
 
   Background:
     Given open page
     And check page title
     And sign in with login = "test.qa.3@esprow.com" and password = "temporaryAccount"
 
-  Scenario: Payment Exchange subscription
+  Scenario: Payment Verification Error Exchange subscription
     #delete
     Then delete all Exchanges
 

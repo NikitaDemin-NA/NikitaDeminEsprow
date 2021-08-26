@@ -2,14 +2,14 @@
 #encoding: utf-8
 
 @AddBigQuantity @all
-Feature: Check adding Exchange subscription of ETP Markets
+Feature: Check adding a big quantity of Exchange subscription of ETP Markets
 
   Background:
     Given open page
     And check page title
     And sign in with login = "test.qa.3@esprow.com" and password = "temporaryAccount"
 
-  Scenario: Add Exchange subscription
+  Scenario: Add a big quantity of Exchange subscription
     #delete
     Then delete all Exchanges
 

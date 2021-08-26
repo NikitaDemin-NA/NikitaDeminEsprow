@@ -1,15 +1,15 @@
 #language: en
 #encoding: utf-8
 
-@Modify @all
-Feature: Check adding Exchange subscription of ETP Markets
+@PayTransactionErrorCard @all
+Feature: Check payment transaction error Exchange subscription of ETP Markets
 
   Background:
     Given open page
     And check page title
     And sign in with login = "test.qa.3@esprow.com" and password = "temporaryAccount"
 
-  Scenario: Add Exchange subscription
+  Scenario: Payment Transaction Error Exchange subscription
     #delete
     Then delete all Exchanges
 
@@ -17,16 +17,7 @@ Feature: Check adding Exchange subscription of ETP Markets
     Then add 1 new Exchange with "FIX 4.2" Protocol Type and 1 Number of Sessions
     Then check Final Account
 
-
-    #modify
-    Then add 3 new Exchange with "FIX 5.0" Protocol Type and 3 Number of Sessions
-    Then check Final Account
-
     #pay
-    Then pay for the Exchanges
+    Then pay for the Exchanges with "Transaction Error Card"
 
     When close browser
-
-
-
-

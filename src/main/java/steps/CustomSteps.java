@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
 
 public class CustomSteps extends FinalAccount {
 
-
     @Given("open page")
     public void startBrowserInMacOrWindows() {
         String os = System.getProperty("os.name");

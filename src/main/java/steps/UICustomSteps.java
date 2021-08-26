@@ -475,10 +475,10 @@ public class UICustomSteps {
             String findTextOfError = getElementByXpath(driver, "//*[contains(text(),'Error message')]").getText();
             String parseFindTextOfError = findTextOfError.replaceAll("[^0-9]", "").substring(4);
             if (parseFindTextOfError.equals("3009")) {
-                throw new Exception("Due to \"Verification Error Card\"");
+                System.out.println("Due to \"Verification Error Card\"");
             }
             if (parseFindTextOfError.equals("3001")) {
-                throw new Exception("Due to \"Transaction Error Card\"");
+                System.out.println("Due to \"Transaction Error Card\"");
             }
         } catch (TimeoutException e) {
         }
@@ -507,11 +507,11 @@ public class UICustomSteps {
     }
 
     public void openSubcirption() throws Exception {
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        waitForElementToAppear(driver, "//span[text()='test']", 5);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        waitForElementToAppear(driver, "//span[text()='test']", 20);
         WebElement testButton = driver.findElement(By.xpath("//span[text()='test']"));
         testButton.click();
-        waitForElementToAppear(driver, "//a[text()='Subscription']", 5);
+        waitForElementToAppear(driver, "//a[text()='Subscription']", 20);
         WebElement subscriptionButton = driver.findElement(By.xpath("//a[text()='Subscription']"));
         subscriptionButton.click();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
