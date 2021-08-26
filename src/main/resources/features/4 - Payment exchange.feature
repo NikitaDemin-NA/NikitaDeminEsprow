@@ -1,6 +1,10 @@
 #language: en
 #encoding: utf-8
 
+  #Choose test by tags in RunnerTest
+  #You can change "variables" of steps as you want
+  #I added parallel config for parallel browser execution - use "mvn test". But site will pop-up a error (Session is Expired)
+
 @Pay @all
 Feature: Check payment Exchange subscription of ETP Markets
 
