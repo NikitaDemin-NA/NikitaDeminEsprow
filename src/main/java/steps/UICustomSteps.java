@@ -1,9 +1,6 @@
 package steps;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,7 +25,6 @@ public class UICustomSteps {
     int iGetCP;
     int iGetMS;
     int iAddExtraPriceSessionsListSubscription;
-
 
 
     public void getPageInWindows() {
@@ -272,18 +268,18 @@ public class UICustomSteps {
 
     //click payButton
     public void clickPayButton() throws Exception {
-            WebElement payButton = driver.findElement(By.xpath("//button[contains(text(),'Pay')]"));
-            payButton.click();
+        WebElement payButton = driver.findElement(By.xpath("//button[contains(text(),'Pay')]"));
+        payButton.click();
 
-            try {
-                for (int i = 0; i < 20; i++) {
-                    driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-                    waitForElementToAppear(driver, "//h1[contains(text(),'Your order')]", 20);
-                    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                }
-            } catch (Exception e) {
-                Thread.sleep(1000);
+        try {
+            for (int i = 0; i < 20; i++) {
+                driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+                waitForElementToAppear(driver, "//h1[contains(text(),'Your order')]", 20);
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             }
+        } catch (Exception e) {
+            Thread.sleep(1000);
+        }
 
     }
 
@@ -321,34 +317,33 @@ public class UICustomSteps {
 
     public void checkSessionsExpired() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-         try {
-                WebElement clickOK = driver.findElement(By.xpath("//button[text()='Remove']"));
-                clickOK.click();
-            } catch (Exception e) {
-            }
+        try {
+            WebElement clickOK = driver.findElement(By.xpath("//button[text()='Remove']"));
+            clickOK.click();
+        } catch (Exception e) {
         }
+    }
 
 
+    public void checkPayNowOrder() throws Exception {
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        waitForElementToAppear(driver, "//div/span[text()='Pay now']/../following-sibling::div", 10);
+        String getPayNowOrder = getElementByXpath(driver, "//div/span[text()='Pay now']/../following-sibling::div").getText();
+        String eGetPayNowOrder = getPayNowOrder.replaceAll("[^0-9]", "");
+        int iGetPayNowOrder = Integer.parseInt(eGetPayNowOrder);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-     public void checkPayNowOrder() throws Exception {
-         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-         waitForElementToAppear(driver, "//div/span[text()='Pay now']/../following-sibling::div", 10);
-         String getPayNowOrder = getElementByXpath(driver, "//div/span[text()='Pay now']/../following-sibling::div").getText();
-         String eGetPayNowOrder = getPayNowOrder.replaceAll("[^0-9]", "");
-         int iGetPayNowOrder = Integer.parseInt(eGetPayNowOrder);
-         driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-
-         if(iGetPayNowOrder!=iGetCP){
-             throw new Exception("value of \"Pay Now\" button is not correct");
-         }
-     }
+        if (iGetPayNowOrder != iGetCP) {
+            throw new Exception("value of \"Pay Now\" button is not correct");
+        }
+    }
 
     public void checkNextChargeOrder() throws Exception {
         String getNextChargeOrder = getElementByXpath(driver, "//div/span[contains(text(),'Next charge')]/../following-sibling::div").getText();
         String eGetNextChargeOrder = getNextChargeOrder.replaceAll("[^0-9]", "");
         int iGetNextChargeOrder = Integer.parseInt(eGetNextChargeOrder);
 
-        if(iGetNextChargeOrder!=iGetMS*10){
+        if (iGetNextChargeOrder != iGetMS * 10) {
             throw new Exception("value of \"Next Charge\" button is not correct");
         }
     }
@@ -369,14 +364,14 @@ public class UICustomSteps {
     }
 
     public void checkPayNowCheckout() throws Exception {
-        driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         waitForElementToAppear(driver, "//div/span[text()='Pay now']/../following-sibling::div", 10);
         String getPayNowChekout = getElementByXpath(driver, "//div/span[text()='Pay now']/../following-sibling::div").getText();
         String eGetPayNowCheckout = getPayNowChekout.replaceAll("[^0-9]", "");
         int iGetPayNowCheckout = Integer.parseInt(eGetPayNowCheckout);
-        driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-        if(iGetPayNowCheckout!=iGetCP){
+        if (iGetPayNowCheckout != iGetCP) {
             throw new Exception("value of \"Pay Now\" button is not correct");
         }
     }
@@ -386,13 +381,45 @@ public class UICustomSteps {
         String eGetNextChargeCheckout = getNextChargeCheckout.replaceAll("[^0-9]", "");
         int iGetNextChargeCheckout = Integer.parseInt(eGetNextChargeCheckout);
 
-        if(iGetNextChargeCheckout!=iGetMS*10){
+        if (iGetNextChargeCheckout != iGetMS * 10) {
             throw new Exception("value of \"Next Charge\" button is not correct");
         }
     }
 
+    public void clickEditPayment() {
+        WebElement clickEditPaymentButton = driver.findElement(By.xpath("//div[contains(text(),'Payment')]/../following-sibling::div/div[contains(text(),'Edit')]"));
+        clickEditPaymentButton.click();
+    }
+
+    public void fillFields(String errorNumber) {
+        String verificationErrorCard = "4119 8627 6033 8320";
+        String transactionErrorCard = "4005 5192 0000 0004";
+
+        if (errorNumber.equals("Verification Error Card")) {
+            errorNumber = verificationErrorCard;
+        }
+        if (errorNumber.equals("Transaction Error Card")) {
+            errorNumber = transactionErrorCard;
+        }
+
+        WebElement fieldFirstName = driver.findElement(By.xpath("//*[contains(text(),'First Name')]/../input"));
+        fieldFirstName.sendKeys("Nikita");
+        WebElement fieldLastName = driver.findElement(By.xpath("//*[contains(text(),'Last Name')]/../input"));
+        fieldLastName.sendKeys("Demin");
+        WebElement fieldExpiry = driver.findElement(By.xpath("(//*[contains(text(),'Expiry')]/../div/input)[1]"));
+        fieldExpiry.sendKeys("1222");
+        WebElement fieldCVV = driver.findElement(By.xpath("//*[contains(text(),'CVV')]/../input"));
+        fieldCVV.sendKeys("123");
+        WebElement fieldCardNumber = driver.findElement(By.xpath("//*[contains(text(),'Card Number')]/../input"));
+        fieldCardNumber.sendKeys(errorNumber);
+
+        WebElement clickUpdateButton = driver.findElement(By.xpath("//*[contains(text(),'Update')]/parent::button"));
+        clickUpdateButton.click();
+    }
+
+
     public void clickAgree() throws Exception {
-        if(!checkClickableAgreeButton()) {
+        if (!checkClickableAgreeButton()) {
             WebElement clickAgreeButton = driver.findElement(By.xpath("//input[@type='checkbox']"));
             clickAgreeButton.click();
             checkClickableAgreeButton();
@@ -403,31 +430,33 @@ public class UICustomSteps {
 
     public boolean checkClickableAgreeButton() {
         try {
-                WebDriverWait wait = new WebDriverWait(driver, 2);
-                WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Pay $')]/parent::button")));
-                element.click();
-                return true;
+            WebDriverWait wait = new WebDriverWait(driver, 2);
+            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Pay $')]/parent::button")));
+            element.click();
+            return true;
         } catch (Exception e) {
             return false;
         }
     }
 
     public void checkSuccessOfPay() throws Exception {
-        if(!getSuccessPayText()) {
+        getErrorPayText();
+        if (!getSuccessPayText()) {
             throw new Exception("trouble with payment process");
         } else {
             openSubcirption();
             List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//span[text()='[Exchange not created yet]']"));
             int quantityOfNewExchangesNew = checkNewExchanges.size();
 
-            if(quantityOfNewExchanges != quantityOfNewExchangesNew){
+            if (quantityOfNewExchanges != quantityOfNewExchangesNew) {
                 throw new Exception();
             }
         }
     }
 
-    public boolean getSuccessPayText(){
+    public boolean getSuccessPayText() {
         try {
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             WebDriverWait wait = new WebDriverWait(driver, 5);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='Successful Subscription']")));
             WebElement clickSuccessButton = driver.findElement(By.xpath("//a[@href='/app/exchanges' and text()='Go to exchanges']"));
@@ -438,10 +467,27 @@ public class UICustomSteps {
         }
     }
 
+    public void getErrorPayText() throws Exception {
+        try {
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            WebDriverWait wait = new WebDriverWait(driver, 5);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Error message')]")));
+            String findTextOfError = getElementByXpath(driver, "//*[contains(text(),'Error message')]").getText();
+            String parseFindTextOfError = findTextOfError.replaceAll("[^0-9]", "").substring(4);
+            if (parseFindTextOfError.equals("3009")) {
+                throw new Exception("Due to \"Verification Error Card\"");
+            }
+            if (parseFindTextOfError.equals("3001")) {
+                throw new Exception("Due to \"Transaction Error Card\"");
+            }
+        } catch (TimeoutException e) {
+        }
+    }
+
     public boolean getTrueExchanges() throws InterruptedException {
         List<WebElement> findAllTrueExchanges = getElementsByXpath(driver, "//input [@type='checkbox' and @value='true']");
         int iFindAllTrueExchanges = findAllTrueExchanges.size();
-        if(iFindAllTrueExchanges==quantityOfNewExchanges+1){
+        if (iFindAllTrueExchanges == quantityOfNewExchanges + 1) {
             return true;
         } else {
             return false;
@@ -477,7 +523,6 @@ public class UICustomSteps {
         checkQuantityOfExchanges();
 
     }
-
 
 
 }

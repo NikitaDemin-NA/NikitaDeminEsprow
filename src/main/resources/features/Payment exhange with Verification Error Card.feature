@@ -1,7 +1,7 @@
 #language: en
 #encoding: utf-8
 
-@Pay @all
+@PayVerificationErrorCard @all
 Feature: Check payment Exchange subscription of ETP Markets
 
   Background:
@@ -18,4 +18,4 @@ Feature: Check payment Exchange subscription of ETP Markets
     Then check Final Account
 
     #pay
-    Then pay for the Exchanges
+    Then pay for the Exchanges with "Verification Error Card"

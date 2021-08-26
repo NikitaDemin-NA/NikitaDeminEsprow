@@ -156,6 +156,23 @@ public class CustomSteps extends FinalAccount {
         checkSuccessOfPay();
     }
 
+    @Given("pay for the Exchanges with {string}")
+    public void payForTheExchangeWith(String errorNumber) throws Exception {
+        checkQuantityOfExchanges();
+        clickPayButton();
+        //checkValueOfExchangePO();
+        //checkValueOfSessionsPO();
+        checkPayNowOrder();
+        checkNextChargeOrder();
+        clickCheckout();
+        checkPayNowCheckout();
+        checkNextChargeCheckout();
+        clickEditPayment();
+        fillFields(errorNumber);
+        clickAgree();
+        checkSuccessOfPay();
+    }
+
     @Given("delete all Exchanges")
     public void deleteAllEchanges() throws Exception {
         checkQuantityOfExchanges();

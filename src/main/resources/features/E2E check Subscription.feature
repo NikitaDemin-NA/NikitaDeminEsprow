@@ -1,13 +1,13 @@
 #language: en
 #encoding: utf-8
 
-@Test
+@E2E @all
   Feature: E2E check Subscription of ETP Markets
 
     Background:
-      When open page
-      Then check page title
-      Given sign in with login = "test.qa.3@esprow.com" and password = "temporaryAccount"
+      Given open page
+      And check page title
+      And sign in with login = "test.qa.3@esprow.com" and password = "temporaryAccount"
 
     Scenario: Delete, add, pay, modify Exchange subscription
       #delete

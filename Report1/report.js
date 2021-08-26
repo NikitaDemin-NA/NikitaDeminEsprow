@@ -1,11 +1,14 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/main/resources/features/E2E%20check%20Subscription.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/main/resources/features/Payment%20exhange%20with%20Transaction%20Error%20Card.feature");
 formatter.feature({
-  "name": "E2E check Subscription of ETP Markets",
+  "name": "Check payment Exchange subscription of ETP Markets",
   "description": "",
   "keyword": "Feature",
   "tags": [
     {
-      "name": "@Test"
+      "name": "@PayTransactionErrorCard"
+    },
+    {
+      "name": "@all"
     }
   ]
 });
@@ -16,7 +19,7 @@ formatter.background({
 });
 formatter.step({
   "name": "open page",
-  "keyword": "When "
+  "keyword": "Given "
 });
 formatter.match({
   "location": "steps.CustomSteps.startBrowserInMacOrWindows()"
@@ -26,7 +29,7 @@ formatter.result({
 });
 formatter.step({
   "name": "check page title",
-  "keyword": "Then "
+  "keyword": "And "
 });
 formatter.match({
   "location": "steps.CustomSteps.getTitle()"
@@ -36,7 +39,7 @@ formatter.result({
 });
 formatter.step({
   "name": "sign in with login \u003d \"test.qa.3@esprow.com\" and password \u003d \"temporaryAccount\"",
-  "keyword": "Given "
+  "keyword": "And "
 });
 formatter.match({
   "location": "steps.CustomSteps.logIn(java.lang.String,java.lang.String)"
@@ -45,12 +48,15 @@ formatter.result({
   "status": "passed"
 });
 formatter.scenario({
-  "name": "Delete, add, pay, modify Exchange subscription",
+  "name": "Payment Exchange subscription",
   "description": "",
   "keyword": "Scenario",
   "tags": [
     {
-      "name": "@Test"
+      "name": "@PayTransactionErrorCard"
+    },
+    {
+      "name": "@all"
     }
   ]
 });
@@ -85,43 +91,14 @@ formatter.result({
   "status": "passed"
 });
 formatter.step({
-  "name": "add 2 extra Sessions for all Exchanges",
+  "name": "pay for the Exchanges with \"Transaction Error Card\"",
   "keyword": "Then "
 });
 formatter.match({
-  "location": "steps.CustomSteps.addExtraSessions(int)"
+  "location": "steps.CustomSteps.payForTheExchangeWith(java.lang.String)"
 });
 formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "check Final Account",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.checkFinalAccount()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "pay for the Exchanges",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.payForTheExchange()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "close browser",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "steps.CustomSteps.tearDown()"
-});
-formatter.result({
-  "status": "passed"
+  "error_message": "java.lang.Exception: Due to \"Transaction Error Card\"\n\tat steps.UICustomSteps.getErrorPayText(UICustomSteps.java:481)\n\tat steps.UICustomSteps.checkSuccessOfPay(UICustomSteps.java:443)\n\tat steps.CustomSteps.payForTheExchangeWith(CustomSteps.java:173)\n\tat ✽.pay for the Exchanges with \"Transaction Error Card\"(file:///Users/andrei/IdeaProjects/NikitaDeminEsprow/src/main/resources/features/Payment%20exhange%20with%20Transaction%20Error%20Card.feature:21)\n",
+  "status": "failed"
 });
 });
