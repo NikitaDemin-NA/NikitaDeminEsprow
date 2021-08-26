@@ -511,6 +511,7 @@ public class UICustomSteps {
         waitForElementToAppear(driver, "//span[text()='test']", 5);
         WebElement testButton = driver.findElement(By.xpath("//span[text()='test']"));
         testButton.click();
+        waitForElementToAppear(driver, "//a[text()='Subscription']", 5);
         WebElement subscriptionButton = driver.findElement(By.xpath("//a[text()='Subscription']"));
         subscriptionButton.click();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
