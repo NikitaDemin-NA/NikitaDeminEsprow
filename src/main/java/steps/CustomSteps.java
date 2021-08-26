@@ -73,7 +73,7 @@ public class CustomSteps extends FinalAccount {
             clickProtocolType.click();
 
             //steps before adding Number of Sessions
-            checkNumberOfSessions();
+            //checkNumberOfSessions();
             checkNumberOfProtocol("$50.0");
             checkNumberOfSessions("$0.0");
             checkNumberOfTotal("$50.0");

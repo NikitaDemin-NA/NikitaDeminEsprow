@@ -1,11 +1,11 @@
-$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/main/resources/features/2%20-%20Add%20exchange.feature");
+$(document).ready(function() {var formatter = new CucumberHTML.DOMFormatter($('.cucumber-report'));formatter.uri("file:src/main/resources/features/1%20-%20E2E%20check%20Subscription.feature");
 formatter.feature({
-  "name": "Check adding Exchange subscription of ETP Markets",
+  "name": "E2E check Subscription of ETP Markets",
   "description": "",
   "keyword": "Feature",
   "tags": [
     {
-      "name": "@Add"
+      "name": "@E2E"
     },
     {
       "name": "@all"
@@ -48,12 +48,12 @@ formatter.result({
   "status": "passed"
 });
 formatter.scenario({
-  "name": "Add Exchange subscription",
+  "name": "Delete, add, pay, modify Exchange subscription",
   "description": "",
   "keyword": "Scenario",
   "tags": [
     {
-      "name": "@Add"
+      "name": "@E2E"
     },
     {
       "name": "@all"
@@ -76,88 +76,4 @@ formatter.step({
 });
 formatter.match({
   "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "check Final Account",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.checkFinalAccount()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "add 2 new Exchange with \"FIX 4.4\" Protocol Type and 2 Number of Sessions",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "check Final Account",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.checkFinalAccount()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "pay for the Exchanges",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.payForTheExchange()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "add 3 new Exchange with \"FIX 5.0\" Protocol Type and 3 Number of Sessions",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "check Final Account",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.checkFinalAccount()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "pay for the Exchanges",
-  "keyword": "Then "
-});
-formatter.match({
-  "location": "steps.CustomSteps.payForTheExchange()"
-});
-formatter.result({
-  "status": "passed"
-});
-formatter.step({
-  "name": "close browser",
-  "keyword": "When "
-});
-formatter.match({
-  "location": "steps.CustomSteps.tearDown()"
-});
-formatter.result({
-  "status": "passed"
-});
 });
