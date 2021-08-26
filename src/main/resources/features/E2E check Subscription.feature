@@ -24,7 +24,6 @@
       #pay
       Then pay for the Exchanges
 
-
       When close browser
 
 

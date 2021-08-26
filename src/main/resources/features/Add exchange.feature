@@ -30,6 +30,8 @@ Feature: Check adding Exchange subscription of ETP Markets
     #pay
     Then pay for the Exchanges
 
+    When close browser
+
 
 
 

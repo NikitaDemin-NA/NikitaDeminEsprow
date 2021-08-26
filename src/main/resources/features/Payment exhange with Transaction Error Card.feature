@@ -19,3 +19,5 @@ Feature: Check payment Exchange subscription of ETP Markets
 
     #pay
     Then pay for the Exchanges with "Transaction Error Card"
+
+    When close browser
