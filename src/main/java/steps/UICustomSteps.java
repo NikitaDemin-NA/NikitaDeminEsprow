@@ -171,6 +171,7 @@ public class UICustomSteps {
 
     //check number of sessions
     public void checkNumberOfSessions() throws Exception {
+        waitForElementToAppear(driver, "//div/span[text()='Number of Sessions']/following-sibling::div/div[2]", 5);
         String numberOfSessions = getElementByXpath(driver, "//div/span[text()='Number of Sessions']/following-sibling::div/div[2]").getText();
 
         if (!numberOfSessions.equals("0")) {
