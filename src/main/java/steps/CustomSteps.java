@@ -152,7 +152,7 @@ public class CustomSteps extends FinalAccount {
         checkPayNowCheckout();
         checkNextChargeCheckout();
         clickAgree();
-        checkSuccessOfPay();
+        checkSuccessOfPay(true);
     }
 
     @Given("pay for the Exchanges with {string}")
@@ -167,9 +167,9 @@ public class CustomSteps extends FinalAccount {
         checkPayNowCheckout();
         checkNextChargeCheckout();
         clickEditPayment();
-        fillFields(errorNumber);
+        fillFields(errorNumber);  //fill values for not valid card
         clickAgree();
-        checkSuccessOfPay();
+        checkSuccessOfPay(false);
     }
 
     @Given("delete all Exchanges")

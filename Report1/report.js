@@ -45,8 +45,7 @@ formatter.match({
   "location": "steps.CustomSteps.logIn(java.lang.String,java.lang.String)"
 });
 formatter.result({
-  "error_message": "org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //span[text()\u003d\u0027test\u0027] (tried for 20 second(s) with 500 milliseconds interval)\n\tat org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:95)\n\tat org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:272)\n\tat steps.UICustomSteps.waitForElementToAppear(UICustomSteps.java:265)\n\tat steps.UICustomSteps.openSubcirption(UICustomSteps.java:511)\n\tat steps.CustomSteps.logIn(CustomSteps.java:56)\n\tat ✽.sign in with login \u003d \"test.qa.3@esprow.com\" and password \u003d \"temporaryAccount\"(file:///Users/andrei/IdeaProjects/NikitaDeminEsprow/src/main/resources/features/1%20-%20E2E%20check%20Subscription.feature:15)\nCaused by: org.openqa.selenium.NoSuchWindowException: no such window: target window already closed\nfrom unknown error: web view not found\n  (Session info: chrome\u003d92.0.4515.159)\nBuild info: version: \u00273.141.59\u0027, revision: \u0027e82be7d358\u0027, time: \u00272018-11-14T08:17:03\u0027\nSystem info: host: \u0027iMac-andrej.local\u0027, ip: \u0027192.168.0.11\u0027, os.name: \u0027Mac OS X\u0027, os.arch: \u0027x86_64\u0027, os.version: \u002710.13.6\u0027, java.version: \u00271.8.0_282\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 92.0.4515.159, chrome: {chromedriverVersion: 92.0.4515.107 (87a818b10553..., userDataDir: /var/folders/7r/_mrhmvv52wq...}, goog:chromeOptions: {debuggerAddress: localhost:65046}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: MAC, platformName: MAC, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}\nSession ID: 7ebae6a1eca87ba7461f5b800e76be2c\n*** Element info: {Using\u003dxpath, value\u003d//span[text()\u003d\u0027test\u0027]}\n\tat sun.reflect.GeneratedConstructorAccessor9.newInstance(Unknown Source)\n\tat sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\n\tat java.lang.reflect.Constructor.newInstance(Constructor.java:423)\n\tat org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)\n\tat org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)\n\tat org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)\n\tat org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)\n\tat org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)\n\tat org.openqa.selenium.By$ByXPath.findElement(By.java:353)\n\tat org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)\n\tat org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:205)\n\tat org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:201)\n\tat org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:249)\n\tat steps.UICustomSteps.waitForElementToAppear(UICustomSteps.java:265)\n\tat steps.UICustomSteps.openSubcirption(UICustomSteps.java:511)\n\tat steps.CustomSteps.logIn(CustomSteps.java:56)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat io.cucumber.java.Invoker.invoke(Invoker.java:27)\n\tat io.cucumber.java.JavaStepDefinition.execute(JavaStepDefinition.java:27)\n\tat io.cucumber.core.runner.PickleStepDefinitionMatch.runStep(PickleStepDefinitionMatch.java:63)\n\tat io.cucumber.core.runner.TestStep.executeStep(TestStep.java:64)\n\tat io.cucumber.core.runner.TestStep.run(TestStep.java:49)\n\tat io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:46)\n\tat io.cucumber.core.runner.TestCase.run(TestCase.java:51)\n\tat io.cucumber.core.runner.Runner.runPickle(Runner.java:66)\n\tat io.cucumber.junit.PickleRunners$NoStepDescriptions.run(PickleRunners.java:149)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:83)\n\tat io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:24)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:185)\n\tat io.cucumber.junit.Cucumber.runChild(Cucumber.java:83)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat io.cucumber.junit.Cucumber$RunCucumber.evaluate(Cucumber.java:219)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264)\n\tat org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)\n\tat org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124)\n\tat org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200)\n\tat org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153)\n\tat org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)\n",
-  "status": "failed"
+  "status": "passed"
 });
 formatter.scenario({
   "name": "Delete, add, pay, modify Exchange subscription",
@@ -69,7 +68,7 @@ formatter.match({
   "location": "steps.CustomSteps.deleteAllEchanges()"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.step({
   "name": "add 1 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
@@ -79,7 +78,7 @@ formatter.match({
   "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.step({
   "name": "check Final Account",
@@ -89,7 +88,7 @@ formatter.match({
   "location": "steps.CustomSteps.checkFinalAccount()"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.step({
   "name": "add 2 extra Sessions for all Exchanges",
@@ -99,7 +98,7 @@ formatter.match({
   "location": "steps.CustomSteps.addExtraSessions(int)"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.step({
   "name": "check Final Account",
@@ -109,7 +108,7 @@ formatter.match({
   "location": "steps.CustomSteps.checkFinalAccount()"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.step({
   "name": "pay for the Exchanges",
@@ -119,7 +118,7 @@ formatter.match({
   "location": "steps.CustomSteps.payForTheExchange()"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.step({
   "name": "close browser",
@@ -129,7 +128,7 @@ formatter.match({
   "location": "steps.CustomSteps.tearDown()"
 });
 formatter.result({
-  "status": "skipped"
+  "status": "passed"
 });
 formatter.uri("file:src/main/resources/features/2%20-%20Add%20exchange.feature");
 formatter.feature({
@@ -249,4 +248,619 @@ formatter.step({
 });
 formatter.match({
   "location": "steps.CustomSteps.payForTheExchange()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "add 3 new Exchange with \"FIX 5.0\" Protocol Type and 3 Number of Sessions",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check Final Account",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.checkFinalAccount()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "pay for the Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.payForTheExchange()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "close browser",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "steps.CustomSteps.tearDown()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.uri("file:src/main/resources/features/3%20-%20Modify%20exchange.feature");
+formatter.feature({
+  "name": "Check modifying Exchange subscription of ETP Markets",
+  "description": "",
+  "keyword": "Feature",
+  "tags": [
+    {
+      "name": "@Modify"
+    },
+    {
+      "name": "@all"
+    }
+  ]
+});
+formatter.background({
+  "name": "",
+  "description": "",
+  "keyword": "Background"
+});
+formatter.step({
+  "name": "open page",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "steps.CustomSteps.startBrowserInMacOrWindows()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check page title",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "steps.CustomSteps.getTitle()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "sign in with login \u003d \"test.qa.3@esprow.com\" and password \u003d \"temporaryAccount\"",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "steps.CustomSteps.logIn(java.lang.String,java.lang.String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Modify Exchange subscription",
+  "description": "",
+  "keyword": "Scenario",
+  "tags": [
+    {
+      "name": "@Modify"
+    },
+    {
+      "name": "@all"
+    }
+  ]
+});
+formatter.step({
+  "name": "delete all Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.deleteAllEchanges()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "add 1 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check Final Account",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.checkFinalAccount()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "add 3 new Exchange with \"FIX 5.0\" Protocol Type and 3 Number of Sessions",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check Final Account",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.checkFinalAccount()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "pay for the Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.payForTheExchange()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "close browser",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "steps.CustomSteps.tearDown()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.uri("file:src/main/resources/features/4%20-%20Payment%20exchange.feature");
+formatter.feature({
+  "name": "Check payment Exchange subscription of ETP Markets",
+  "description": "",
+  "keyword": "Feature",
+  "tags": [
+    {
+      "name": "@Pay"
+    },
+    {
+      "name": "@all"
+    }
+  ]
+});
+formatter.background({
+  "name": "",
+  "description": "",
+  "keyword": "Background"
+});
+formatter.step({
+  "name": "open page",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "steps.CustomSteps.startBrowserInMacOrWindows()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check page title",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "steps.CustomSteps.getTitle()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "sign in with login \u003d \"test.qa.3@esprow.com\" and password \u003d \"temporaryAccount\"",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "steps.CustomSteps.logIn(java.lang.String,java.lang.String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Payment Exchange subscription",
+  "description": "",
+  "keyword": "Scenario",
+  "tags": [
+    {
+      "name": "@Pay"
+    },
+    {
+      "name": "@all"
+    }
+  ]
+});
+formatter.step({
+  "name": "delete all Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.deleteAllEchanges()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "add 1 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check Final Account",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.checkFinalAccount()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "pay for the Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.payForTheExchange()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "close browser",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "steps.CustomSteps.tearDown()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.uri("file:src/main/resources/features/5%20-%20Payment%20exhange%20with%20Verification%20Error%20Card.feature");
+formatter.feature({
+  "name": "Check payment verification error Exchange subscription of ETP Markets",
+  "description": "",
+  "keyword": "Feature",
+  "tags": [
+    {
+      "name": "@PayVerificationErrorCard"
+    },
+    {
+      "name": "@all"
+    }
+  ]
+});
+formatter.background({
+  "name": "",
+  "description": "",
+  "keyword": "Background"
+});
+formatter.step({
+  "name": "open page",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "steps.CustomSteps.startBrowserInMacOrWindows()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check page title",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "steps.CustomSteps.getTitle()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "sign in with login \u003d \"test.qa.3@esprow.com\" and password \u003d \"temporaryAccount\"",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "steps.CustomSteps.logIn(java.lang.String,java.lang.String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Payment Verification Error Exchange subscription",
+  "description": "",
+  "keyword": "Scenario",
+  "tags": [
+    {
+      "name": "@PayVerificationErrorCard"
+    },
+    {
+      "name": "@all"
+    }
+  ]
+});
+formatter.step({
+  "name": "delete all Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.deleteAllEchanges()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "add 1 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check Final Account",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.checkFinalAccount()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "pay for the Exchanges with \"Verification Error Card\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.payForTheExchangeWith(java.lang.String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "close browser",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "steps.CustomSteps.tearDown()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.uri("file:src/main/resources/features/6%20-%20Payment%20exhange%20with%20Transaction%20Error%20Card.feature");
+formatter.feature({
+  "name": "Check payment transaction error Exchange subscription of ETP Markets",
+  "description": "",
+  "keyword": "Feature",
+  "tags": [
+    {
+      "name": "@PayTransactionErrorCard"
+    },
+    {
+      "name": "@all"
+    }
+  ]
+});
+formatter.background({
+  "name": "",
+  "description": "",
+  "keyword": "Background"
+});
+formatter.step({
+  "name": "open page",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "steps.CustomSteps.startBrowserInMacOrWindows()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check page title",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "steps.CustomSteps.getTitle()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "sign in with login \u003d \"test.qa.3@esprow.com\" and password \u003d \"temporaryAccount\"",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "steps.CustomSteps.logIn(java.lang.String,java.lang.String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Payment Transaction Error Exchange subscription",
+  "description": "",
+  "keyword": "Scenario",
+  "tags": [
+    {
+      "name": "@PayTransactionErrorCard"
+    },
+    {
+      "name": "@all"
+    }
+  ]
+});
+formatter.step({
+  "name": "delete all Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.deleteAllEchanges()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "add 1 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check Final Account",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.checkFinalAccount()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "pay for the Exchanges with \"Transaction Error Card\"",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.payForTheExchangeWith(java.lang.String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "close browser",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "steps.CustomSteps.tearDown()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.uri("file:src/main/resources/features/7%20-%20Add%20big%20quantity%20of%20exchangs.feature");
+formatter.feature({
+  "name": "Check adding a big quantity of Exchange subscription of ETP Markets",
+  "description": "",
+  "keyword": "Feature",
+  "tags": [
+    {
+      "name": "@AddBigQuantity"
+    },
+    {
+      "name": "@all"
+    }
+  ]
+});
+formatter.background({
+  "name": "",
+  "description": "",
+  "keyword": "Background"
+});
+formatter.step({
+  "name": "open page",
+  "keyword": "Given "
+});
+formatter.match({
+  "location": "steps.CustomSteps.startBrowserInMacOrWindows()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "check page title",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "steps.CustomSteps.getTitle()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "sign in with login \u003d \"test.qa.3@esprow.com\" and password \u003d \"temporaryAccount\"",
+  "keyword": "And "
+});
+formatter.match({
+  "location": "steps.CustomSteps.logIn(java.lang.String,java.lang.String)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.scenario({
+  "name": "Add a big quantity of Exchange subscription",
+  "description": "",
+  "keyword": "Scenario",
+  "tags": [
+    {
+      "name": "@AddBigQuantity"
+    },
+    {
+      "name": "@all"
+    }
+  ]
+});
+formatter.step({
+  "name": "delete all Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.deleteAllEchanges()"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "add 6 new Exchange with \"FIX 4.2\" Protocol Type and 1 Number of Sessions",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.AddNewExchange(int,java.lang.String,int)"
+});
+formatter.result({
+  "status": "passed"
+});
+formatter.step({
+  "name": "pay for the Exchanges",
+  "keyword": "Then "
+});
+formatter.match({
+  "location": "steps.CustomSteps.payForTheExchange()"
+});
+formatter.result({
+  "error_message": "org.openqa.selenium.ElementNotInteractableException: element not interactable\n  (Session info: chrome\u003d92.0.4515.159)\nBuild info: version: \u00273.141.59\u0027, revision: \u0027e82be7d358\u0027, time: \u00272018-11-14T08:17:03\u0027\nSystem info: host: \u0027iMac-andrej.local\u0027, ip: \u0027192.168.0.11\u0027, os.name: \u0027Mac OS X\u0027, os.arch: \u0027x86_64\u0027, os.version: \u002710.13.6\u0027, java.version: \u002716.0.2\u0027\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 92.0.4515.159, chrome: {chromedriverVersion: 92.0.4515.107 (87a818b10553..., userDataDir: /var/folders/7r/_mrhmvv52wq...}, goog:chromeOptions: {debuggerAddress: localhost:49703}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: MAC, platformName: MAC, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}\nSession ID: c79f988b0b615f02c39e612b8356f760\n\tat java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:78)\n\tat java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)\n\tat java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)\n\tat java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)\n\tat org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)\n\tat org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)\n\tat org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)\n\tat org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)\n\tat org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)\n\tat org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)\n\tat org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:285)\n\tat org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:84)\n\tat steps.UICustomSteps.clickPayButton(UICustomSteps.java:273)\n\tat steps.CustomSteps.payForTheExchange(CustomSteps.java:146)\n\tat ✽.pay for the Exchanges(file:///Users/andrei/IdeaProjects/NikitaDeminEsprow/src/main/resources/features/7%20-%20Add%20big%20quantity%20of%20exchangs.feature:24)\n",
+  "status": "failed"
+});
+formatter.step({
+  "name": "close browser",
+  "keyword": "When "
+});
+formatter.match({
+  "location": "steps.CustomSteps.tearDown()"
+});
+formatter.result({
+  "status": "skipped"
+});
 });

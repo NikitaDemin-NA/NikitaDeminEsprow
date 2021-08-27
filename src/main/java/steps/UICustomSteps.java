@@ -25,6 +25,7 @@ public class UICustomSteps {
     int iGetCP;
     int iGetMS;
     int iAddExtraPriceSessionsListSubscription;
+    boolean b;
 
 
     public void getPageInWindows() {
@@ -439,11 +440,35 @@ public class UICustomSteps {
         }
     }
 
-    public void checkSuccessOfPay() throws Exception {
-        getErrorPayText();
-        if (!getSuccessPayText()) {
-            throw new Exception("trouble with payment process");
-        } else {
+    public void checkSuccessOfPay(boolean b) throws Exception {
+        try {
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            WebDriverWait wait = new WebDriverWait(driver, 5);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Error message')]")));
+            String findTextOfError = getElementByXpath(driver, "//*[contains(text(),'Error message')]").getText();
+            String parseFindTextOfError = findTextOfError.replaceAll("[^0-9]", "");
+            if (parseFindTextOfError.equals("3009")) {
+                if (!b) {
+                    return;
+                } else {
+                    throw new Exception("Due to \"Verification Error Card\"");
+                }
+            }
+            if (parseFindTextOfError.substring(4).equals("3001")) {
+                if (!b) {
+                    return;
+                } else {
+                    throw new Exception("Due to \"Transaction Error Card\"");
+                }
+            }
+        } catch (TimeoutException e) {
+        }
+        try {
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            WebDriverWait wait = new WebDriverWait(driver, 5);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='Successful Subscription']")));
+            WebElement clickSuccessButton = driver.findElement(By.xpath("//a[@href='/app/exchanges' and text()='Go to exchanges']"));
+            clickSuccessButton.click();
             openSubcirption();
             List<WebElement> checkNewExchanges = driver.findElements(By.xpath("//span[text()='[Exchange not created yet]']"));
             int quantityOfNewExchangesNew = checkNewExchanges.size();
@@ -451,38 +476,11 @@ public class UICustomSteps {
             if (quantityOfNewExchanges != quantityOfNewExchangesNew) {
                 throw new Exception();
             }
-        }
-    }
-
-    public boolean getSuccessPayText() {
-        try {
-            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-            WebDriverWait wait = new WebDriverWait(driver, 5);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='Successful Subscription']")));
-            WebElement clickSuccessButton = driver.findElement(By.xpath("//a[@href='/app/exchanges' and text()='Go to exchanges']"));
-            clickSuccessButton.click();
-            return true;
         } catch (Exception e) {
-            return false;
+            throw new Exception("trouble with payment process");
         }
     }
 
-    public void getErrorPayText() throws Exception {
-        try {
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            WebDriverWait wait = new WebDriverWait(driver, 5);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Error message')]")));
-            String findTextOfError = getElementByXpath(driver, "//*[contains(text(),'Error message')]").getText();
-            String parseFindTextOfError = findTextOfError.replaceAll("[^0-9]", "").substring(4);
-            if (parseFindTextOfError.equals("3009")) {
-                System.out.println("Due to \"Verification Error Card\"");
-            }
-            if (parseFindTextOfError.equals("3001")) {
-                System.out.println("Due to \"Transaction Error Card\"");
-            }
-        } catch (TimeoutException e) {
-        }
-    }
 
     public boolean getTrueExchanges() throws InterruptedException {
         List<WebElement> findAllTrueExchanges = getElementsByXpath(driver, "//input [@type='checkbox' and @value='true']");
@@ -507,14 +505,8 @@ public class UICustomSteps {
     }
 
     public void openSubcirption() throws Exception {
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        waitForElementToAppear(driver, "//span[text()='test']", 20);
-        WebElement testButton = driver.findElement(By.xpath("//span[text()='test']"));
-        testButton.click();
-        waitForElementToAppear(driver, "//a[text()='Subscription']", 20);
-        WebElement subscriptionButton = driver.findElement(By.xpath("//a[text()='Subscription']"));
-        subscriptionButton.click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.get("https://spa-dev.etpmarkets.com:3000/app/subscription");
 
         waitforPageLoad(driver);
         if (getElementByXpath(driver, "//h1[text()='Subscription']") == null) {
