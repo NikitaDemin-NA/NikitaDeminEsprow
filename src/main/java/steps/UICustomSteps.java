@@ -41,7 +41,7 @@ public class UICustomSteps {
 
 
     public void getPageInMac() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver92_Mac");
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver95_Mac");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-gpu", "--window-size=1920,1200", "--ignore-certificate-errors", "--disable-extensions", "--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
